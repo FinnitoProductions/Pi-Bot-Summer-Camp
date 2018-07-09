@@ -9,11 +9,13 @@ public class Robot extends TimedRobot
 {
     private DigitalMotor left, right;
     private static Drivetrain dt;
+    private static Arm arm;
     
     public Robot()
     {
-        super(RobotMap.AUTON_TIME, 135000);
+        super(RobotMap.AUTON_TIME_MS, RobotMap.TELEOP_TIME_MS);
         dt = Drivetrain.getInstance();
+        arm = Arm.getInstance();
     }
 
     /**
@@ -59,6 +61,11 @@ public class Robot extends TimedRobot
     public static Drivetrain getDrivetrain()
     {
         return dt;
+    }
+    
+    public static Arm getArm()
+    {
+        return arm;
     }
 
  

@@ -13,9 +13,8 @@ import com.pi4j.io.gpio.RaspiPin;
 
 /**
  * @author joel & Finn Frankis
- *
  */
-public class DigitalMotor {
+public class DigitalMotor implements com.diozero.api.OutputDeviceInterface {
 	
 	private GpioPinDigitalOutput forward, backward;
 	private GpioPinPwmOutput enable;
@@ -36,9 +35,15 @@ public class DigitalMotor {
 		this.enable.setShutdownOptions(true, PinState.LOW, PinPullResistance.OFF);
 	}
 	
-	public void set(double speed) {
-		forward.setState(speed > 0);
-		backward.setState(speed < 0);
-		enable.setPwm((int) Math.round(Math.abs(1024 * speed)));
-	}
+
+    /**
+    * @param speed the speed at which the motors should be set
+    */
+    @Override
+    public void setValue(float speed)
+    {
+        forward.setState(speed > 0);
+        backward.setState(speed < 0);
+        enable.setPwm((int) Math.round(Math.abs(1024 * speed)));
+    }
 }

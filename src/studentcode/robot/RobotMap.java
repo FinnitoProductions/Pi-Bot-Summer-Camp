@@ -7,13 +7,16 @@ package studentcode.robot;
  */
 public class RobotMap
 {
-    public static final int AUTON_TIME = 135000;
+    public static final int AUTON_TIME_MS = 15000;
+    public static final int TELEOP_TIME_MS = 135000;
     
-    public static int LEFT_MOTOR_ENABLE;
-    public static int LEFT_MOTOR_FORWARD;
-    public static int LEFT_MOTOR_BACKWARD;
+    public static final int LEFT_MOTOR_ENABLE = -1;
+    public static final int LEFT_MOTOR_FORWARD = -1;
+    public static final int LEFT_MOTOR_BACKWARD = -1;
     
-    public static int RIGHT_MOTOR_ENABLE;
-    public static int RIGHT_MOTOR_FORWARD;
-    public static int RIGHT_MOTOR_BACKWARD;
+    public static final int RIGHT_MOTOR_ENABLE = -1;
+    public static final int RIGHT_MOTOR_FORWARD = -1; 
+    public static final int RIGHT_MOTOR_BACKWARD = -1;
+    
+    public static final int ARM_SERVO_GPIO = -1;
 }

@@ -2,6 +2,10 @@ package lib;
 
 import java.util.Map;
 
+import com.diozero.api.*;
+import com.diozero.sandpit.Servo;
+import com.diozero.devices.sandpit.TB6612FNGMotor;
+
 /**
  * 
  * @author Finn Frankis
@@ -16,6 +20,9 @@ public class TalonSRX
     private Map<Integer, Double> kP;
     private Map<Integer, Double> kI;
     private Map<Integer, Double> kD;
+    
+    private int initialPWMFrequency;
+    private float initialPulseWidthMs;
     
     public enum ControlMode
     {
@@ -32,18 +39,37 @@ public class TalonSRX
         MagneticEncoder;
     }
     
-    DigitalMotor motor;
+    private OutputDeviceInterface motor;
     
-    public TalonSRX(int[] ports)
+    /**
+     * Constructs a new Talon using a digital H-Bridge motor.
+     * 
+     * @param enablePort the GPIO port used to enable the channel (the magnitude of the speed)
+     * @param forwardPort the GPIO port which is used to change the sign of the forward direction
+     * @param backwardPort the GPIO port which is used to change the sign of the backward direction
+     */
+    public TalonSRX(int enablePort, int forwardPort, int backwardPort)
     {
-        motor = new DigitalMotor(ports[0], ports[1], ports[2]);
+        motor = new DigitalMotor(enablePort, forwardPort, backwardPort);
+    }
+    
+    /**
+     * Constructs a new Talon using a Servo port.
+     * 
+     * @param port the GPIO port into which the Servo signal line is connected
+     */
+    public TalonSRX(int port)
+    {
+        initialPWMFrequency = 50;
+        initialPulseWidthMs = 1f;
+        motor = new Servo(port, initialPWMFrequency, initialPulseWidthMs);
     }
     
     public void set(ControlMode mode, double magnitude)
     {
         if (mode == ControlMode.PercentOutput)
         {
-            motor.set(magnitude);
+            motor.setValue((float) magnitude);
         }
     }
     
@@ -52,7 +78,7 @@ public class TalonSRX
         if (mode == ControlMode.PercentOutput)
         {
             if (dt == DemandType.FeedForward)
-                motor.set(magnitude + demandValue);
+                motor.setValue((float)(magnitude + demandValue));
         }
     }
     

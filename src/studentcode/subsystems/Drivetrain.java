@@ -21,14 +21,12 @@ public class Drivetrain extends Subsystem
     
     public Drivetrain()
     {
-        leftTalon = new TalonSRX(new int[] 
-                {RobotMap.LEFT_MOTOR_ENABLE, 
+        leftTalon = new TalonSRX(RobotMap.LEFT_MOTOR_ENABLE, 
                         RobotMap.LEFT_MOTOR_FORWARD, 
-                        RobotMap.LEFT_MOTOR_BACKWARD});
-        rightTalon = new TalonSRX(new int[] 
-                {RobotMap.RIGHT_MOTOR_ENABLE, 
+                        RobotMap.LEFT_MOTOR_BACKWARD);
+        rightTalon = new TalonSRX(RobotMap.RIGHT_MOTOR_ENABLE, 
                         RobotMap.RIGHT_MOTOR_FORWARD, 
-                        RobotMap.RIGHT_MOTOR_BACKWARD});
+                        RobotMap.RIGHT_MOTOR_BACKWARD);
     }
     
     /**
