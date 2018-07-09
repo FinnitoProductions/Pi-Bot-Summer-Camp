@@ -19,4 +19,5 @@ public class RobotMap
     public static final int RIGHT_MOTOR_BACKWARD = -1;
     
     public static final int ARM_SERVO_GPIO = -1;
+    public static final int CLAW_SERVO_GPIO = -1;
 }
