@@ -30,7 +30,7 @@ public abstract class Command {
 	 * @param s
 	 *            the Subsystem required
 	 */
-	public void requires(Subsystem s) {
+	protected void requires(Subsystem s) {
 		required.add(s);
 	}
 	
@@ -58,26 +58,26 @@ public abstract class Command {
 	 * 
 	 * @return whether this command is finished.
 	 */
-	public abstract boolean isFinished();
+	protected abstract boolean isFinished();
 	
 	/**
 	 * The initialize method is called the first time this Command is run after
 	 * being started.
 	 */
-	public abstract void initialize();
+	protected abstract void initialize();
 	
 	/**
 	 * The execute method is called repeatedly until this Command either
 	 * finishes or is canceled.
 	 */
-	public abstract void execute();
+	protected abstract void execute();
 	
 	/**
 	 * Called when the command ended peacefully. This is where you may want to
 	 * wrap up loose ends, like shutting off a motor that was being used in the
 	 * command.
 	 */
-	public abstract void end();
+	protected abstract void end();
 	
 	/**
 	 * Called when the command ends because somebody called cancel() or another
@@ -88,7 +88,7 @@ public abstract class Command {
 	 * Generally, it is useful to simply call the end() method within this
 	 * method, as done here.
 	 */
-	public void interrupted() {
+	protected void interrupted() {
 		end();
 	}
 	
