@@ -11,7 +11,9 @@ public abstract class Subsystem
     public Subsystem()
     {
     		initDefaultCommand();
-        Scheduler.getInstance().addSubsystem(this);
+    		if(defaultCommand != null) {
+    			Scheduler.getInstance().add(defaultCommand);
+    		}
     }
     
     public abstract void initDefaultCommand();
