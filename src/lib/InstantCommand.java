@@ -6,24 +6,32 @@ package lib;
  */
 public abstract class InstantCommand extends Command {
 	
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see lib.Command#isFinished()
 	 */
 	@Override
-	public boolean isFinished() {
+	protected boolean isFinished() {
 		return true;
 	}
 	
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see lib.Command#execute()
 	 */
 	@Override
-	public void execute() {}
+	protected void execute() {
+	}
 	
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see lib.Command#end()
 	 */
 	@Override
-	public void end() {}
+	protected void end() {
+	}
 	
 }

@@ -71,7 +71,7 @@ public abstract class ConditionalCommand extends Command {
 	 * @see lib.Command#isFinished()
 	 */
 	@Override
-	public boolean isFinished() {
+	protected boolean isFinished() {
 		return running == null || !running.isRunning();
 	}
 	
@@ -81,7 +81,7 @@ public abstract class ConditionalCommand extends Command {
 	 * @see lib.Command#initialize()
 	 */
 	@Override
-	public void initialize() {
+	protected void initialize() {
 		running = condition() ? onTrue : onFalse;
 		if(running != null)
 			running.start();
@@ -93,7 +93,7 @@ public abstract class ConditionalCommand extends Command {
 	 * @see lib.Command#execute()
 	 */
 	@Override
-	public void execute() {
+	protected void execute() {
 	}
 	
 	/*
@@ -102,7 +102,7 @@ public abstract class ConditionalCommand extends Command {
 	 * @see lib.Command#end()
 	 */
 	@Override
-	public void end() {
+	protected void end() {
 		if(running != null && running.isRunning())
 			running.cancel();
 	}

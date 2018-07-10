@@ -36,7 +36,9 @@ public abstract class Command {
 	
 	/**
 	 * Checks if the command requires the given Subsystem.
-	 * @param s the system
+	 * 
+	 * @param s
+	 *            the system
 	 * @return whether or not the subsystem is required, or false if given null
 	 */
 	public boolean doesRequire(Subsystem s) {
