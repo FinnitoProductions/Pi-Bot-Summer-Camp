@@ -1,6 +1,8 @@
 
 package lib;
 
+import java.util.Collections;
+import java.util.IdentityHashMap;
 import java.util.Set;
 
 /**
@@ -11,7 +13,10 @@ import java.util.Set;
 public abstract class Command
 {
     private Set<Subsystem> required;
-    private boolean isRunning;
+    
+    public Command() {
+    		required = Collections.newSetFromMap(new IdentityHashMap<>());
+    }
     
     public void requires(Subsystem s) { required.add(s); }
     
@@ -24,25 +29,20 @@ public abstract class Command
     public abstract void initialize();
     public abstract void execute();
     public abstract void end();
-    
-    public void interrupted()
-    {
-        end();
-    }
+    public void interrupted(){}
     
     public void cancel()
     {
-        end();
+        Scheduler.getInstance().remove(this, true);
     }
     
     public void start()
     {
         Scheduler.getInstance().add(this);
-        isRunning = true;
     }
     
     public boolean isRunning()
     {
-        return isRunning;
+        return Scheduler.getInstance().isRunning(this);
     }
 }

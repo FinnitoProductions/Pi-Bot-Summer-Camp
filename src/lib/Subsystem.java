@@ -1,7 +1,6 @@
 package lib;
 
 /**
- * 
  * @author Finn Frankis
  * @version Jul 8, 2018
  */
@@ -11,6 +10,7 @@ public abstract class Subsystem
     
     public Subsystem()
     {
+    		initDefaultCommand();
         Scheduler.getInstance().addSubsystem(this);
     }
     
@@ -18,6 +18,8 @@ public abstract class Subsystem
     
     public void setDefaultCommand (Command c)
     {
+    		if(!c.doesRequire(this))
+    			throw new IllegalArgumentException("A subsystem's default command must require it");
         defaultCommand = c;
     }
     
