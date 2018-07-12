@@ -46,7 +46,7 @@ public class Scheduler {
 	public void add(Command c) {
 		if(c == null)
 			new IllegalArgumentException("Cannot start a null command").printStackTrace();
-		else if(runningCommands.add(c))
+		else if(!runningCommands.add(c))
 			new IllegalArgumentException("Command " + c.getClass().getSimpleName() + " is already running")
 					.printStackTrace();
 		else {
