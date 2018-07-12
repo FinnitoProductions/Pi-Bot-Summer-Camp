@@ -104,7 +104,7 @@ public abstract class Command {
 	 * must cancel the command group instead.
 	 */
 	public void cancel() {
-		Scheduler.getInstance().remove(this);
+		Scheduler.getInstance().interrupt(this, null);
 	}
 	
 	/**

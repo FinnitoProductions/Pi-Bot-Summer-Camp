@@ -54,7 +54,7 @@ public class Scheduler {
 				if(c != o && sharedSubsystem(c, o))
 					toRemove.push(o);
 			while(!toRemove.isEmpty())
-				remove(toRemove.pop(), c);
+				interrupt(toRemove.pop(), c);
 			try {
 				c.initialize();
 			} catch(Exception e) {
@@ -97,7 +97,7 @@ public class Scheduler {
 	 * @param c
 	 *            the command to stop
 	 */
-	public void remove(Command c, Command cause) {
+	public void interrupt(Command c, Command cause) {
 		if(c == null)
 			new IllegalArgumentException("Cannot stop a null command").printStackTrace();
 		else if(!runningCommands.remove(c))
@@ -112,7 +112,7 @@ public class Scheduler {
 			}
 			for(Subsystem s : c.getRequired())
 				if(s.getDefaultCommand() != null)
-					if(!sharedSubsystem(cause, s.getDefaultCommand()))
+					if(cause == null || !sharedSubsystem(cause, s.getDefaultCommand()))
 						add(s.getDefaultCommand());
 		}
 	}
