@@ -105,6 +105,10 @@ public class PIDController
         return restrictValue(output_F + output_P + output_I + output_D, minOutput, maxOutput);
     }
     
+    public double getClosedLoopError (double loopIndex)
+    {
+        return lastError;
+    }
     private double restrictValue(double value, double min, double max)
     {
         return (value < min) ? min : Math.max(value, max);
