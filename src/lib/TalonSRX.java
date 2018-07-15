@@ -11,15 +11,8 @@ import com.diozero.devices.sandpit.TB6612FNGMotor;
  * @author Finn Frankis
  * @version Jul 8, 2018
  */
-public class TalonSRX
+public class TalonSRX extends PIDController
 {
-    private int primarySlot;
-    private int auxiliarySlot;
-    
-    private Map<Integer, Double> kF;
-    private Map<Integer, Double> kP;
-    private Map<Integer, Double> kI;
-    private Map<Integer, Double> kD;
     
     private int initialPWMFrequency;
     private float initialPulseWidthMs;
@@ -50,6 +43,7 @@ public class TalonSRX
      */
     public TalonSRX(int enablePort, int forwardPort, int backwardPort)
     {
+        super (-1, 1);
         motor = new DigitalMotor(enablePort, forwardPort, backwardPort);
     }
     
@@ -60,6 +54,7 @@ public class TalonSRX
      */
     public TalonSRX(int port)
     {
+        super (-1, 1);
         initialPWMFrequency = 50;
         initialPulseWidthMs = 1f;
         motor = new Servo(port, initialPWMFrequency, initialPulseWidthMs);
@@ -71,56 +66,35 @@ public class TalonSRX
         {
             motor.setValue((float) magnitude);
         }
+        else if (mode == ControlMode.Position)
+        {
+            motor.setValue((float)getOutput(getSelectedSensorPosition(0), magnitude));
+        }
     }
     
     public void set(ControlMode mode, double magnitude, DemandType dt, double demandValue)
     {
-        if (mode == ControlMode.PercentOutput)
-        {
-            if (dt == DemandType.FeedForward)
-                motor.setValue((float)(magnitude + demandValue));
-        }
+        set(mode, dt == DemandType.FeedForward ? magnitude + demandValue : magnitude);
     }
     
-    public void selectProfileSlot(int slotIndex, int loopIndex)
-    {
-        if (loopIndex == 0)
-            primarySlot = slotIndex;
-        else
-            auxiliarySlot = slotIndex;
-    }
     
-    public void config_kF(double kF, int slot, int timeout)
-    {
-        this.kF.put(slot, kF);
-    }
-    
-    public void config_kP(double kP, int slot, int timeout)
-    {
-        this.kP.put(slot, kP);
-    }
-    
-    public void config_kI(double kI, int slot, int timeout)
-    {
-        this.kI.put(slot, kI);
-    }
-    
-    public void config_kD(double kD, int slot, int timeout)
-    {
-        this.kD.put(slot, kD);
-    }
     
     public void configSelectedFeedbackSensor(FeedbackDevice fd, int loopIndex, int timeout)
     {
         
     }
     
-    public void getSelectedFeedbackSensor (int loopIndex)
+    /**
+     * Gets the sensor position at the given loop index.
+     * @param loopIndexthe PID loop index (primary/auxiliary) [0, 1]
+     * @return
+     */
+    public double getSelectedSensorPosition (int loopIndex)
     {
-        
+        return 0;
     }
     
-    public void setSelectedFeedbackSensor (int loopIndex)
+    public void setSelectedSensorPosition (int loopIndex)
     {
         
     }
