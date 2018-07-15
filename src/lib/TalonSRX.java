@@ -7,19 +7,20 @@ import com.diozero.sandpit.Servo;
 import com.diozero.devices.sandpit.TB6612FNGMotor;
 
 /**
- * 
+ * Represents a motor controller.
  * @author Finn Frankis
  * @version Jul 8, 2018
  */
 public class TalonSRX extends PIDController
 {
-    
     private int initialPWMFrequency;
     private float initialPulseWidthMs;
+    private double previousSensorPosition;
+    private double previousTime;
     
     public enum ControlMode
     {
-        PercentOutput, Position, Velocity;
+        PercentOutput, Position, Velocity, Disabled;
     }
     
     public enum DemandType
@@ -60,6 +61,12 @@ public class TalonSRX extends PIDController
         motor = new Servo(port, initialPWMFrequency, initialPulseWidthMs);
     }
     
+    /**
+     * 
+     * @param mode the type of control to be performed
+     * on the talon (including percent output, velocity, and position)
+     * @param magnitude the magnitude of the value to be set
+     */
     public void set(ControlMode mode, double magnitude)
     {
         if (mode == ControlMode.PercentOutput)
@@ -70,6 +77,13 @@ public class TalonSRX extends PIDController
         {
             motor.setValue((float)getOutput(getSelectedSensorPosition(0), magnitude));
         }
+        else if (mode == ControlMode.Velocity)
+        {
+            motor.setValue((float)getOutput(getSelectedSensorVelocity(0), magnitude));
+            
+        }
+        else if (mode == ControlMode.Disabled)
+            motor.setValue(0);
     }
     
     public void set(ControlMode mode, double magnitude, DemandType dt, double demandValue)
@@ -87,11 +101,20 @@ public class TalonSRX extends PIDController
     /**
      * Gets the sensor position at the given loop index.
      * @param loopIndexthe PID loop index (primary/auxiliary) [0, 1]
-     * @return
+     * @return the current sensor position
      */
     public double getSelectedSensorPosition (int loopIndex)
     {
         return 0;
+    }
+    
+    public double getSelectedSensorVelocity (int loopIndex)
+    {
+        double currentVelocity = (getSelectedSensorPosition(0) - previousSensorPosition) 
+                / (System.currentTimeMillis() - previousTime);
+        previousSensorPosition = getSelectedSensorPosition(0);
+        previousTime = System.currentTimeMillis();
+        return currentVelocity;
     }
     
     public void setSelectedSensorPosition (int loopIndex)

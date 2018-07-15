@@ -20,11 +20,13 @@ public class PIDController
     private int auxiliarySlot;
     
     private double lastError;
+    private double lastTime;
     private double errorSum;
     private boolean hasRun;
     
     private double minOutput;
     private double maxOutput;
+    
     
     public PIDController (double minOutput, double maxOutput)
     {
@@ -92,17 +94,15 @@ public class PIDController
         double output_I = kI.get(primarySlot) * errorSum;
         errorSum += error;
         
-        double output_D = -kP.get(primarySlot) * (error - lastError);
-        if (!hasRun)
-        {
-            output_D = 0;
-            hasRun = true;
-        }
-        lastError = error;
+        double output_D = 0; 
+        if (hasRun)
+            output_D = -kD.get(primarySlot) * (error - lastError) 
+                / (System.currentTimeMillis() - lastTime);
 
+        lastError = error;
+        lastTime = System.currentTimeMillis();
         
-        return restrictValue(output_F + output_P + output_I + output_D, -1, 1);
-        
+        return restrictValue(output_F + output_P + output_I + output_D, minOutput, maxOutput);
     }
     
     private double restrictValue(double value, double min, double max)
