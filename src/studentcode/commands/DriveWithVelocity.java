@@ -13,7 +13,7 @@ public class DriveWithVelocity extends Command
 
     public DriveWithVelocity()
     {
-        requires(Robot.getDrivetrain());
+//        requires(Robot.getDrivetrain());
     }
     /**
     * @return

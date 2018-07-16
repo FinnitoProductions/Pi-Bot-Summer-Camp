@@ -6,7 +6,7 @@ package lib;
  */
 public abstract class Subsystem
 {
-    Command defaultCommand;
+    private Command defaultCommand;
     
     public Subsystem()
     {
@@ -21,7 +21,8 @@ public abstract class Subsystem
     public void setDefaultCommand (Command c)
     {
     		if(!c.doesRequire(this))
-    			throw new IllegalArgumentException("A subsystem's default command must require it");
+    		    c.requires(this);
+//    			throw new IllegalArgumentException("A subsystem's default command must require it");
         defaultCommand = c;
     }
     

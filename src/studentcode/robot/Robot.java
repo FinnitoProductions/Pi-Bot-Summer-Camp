@@ -16,8 +16,8 @@ public class Robot extends TimedRobot
     {
         super(RobotMap.AUTON_TIME_MS, RobotMap.TELEOP_TIME_MS);
         dt = Drivetrain.getInstance();
-        arm = Arm.getInstance();
-        claw = Claw.getInstance();
+        //arm = Arm.getInstance();
+        //claw = Claw.getInstance();
     }
 
     /**

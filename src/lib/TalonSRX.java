@@ -45,7 +45,7 @@ public class TalonSRX extends PIDController
     public TalonSRX(int enablePort, int forwardPort, int backwardPort)
     {
         super (-1, 1);
-        motor = new DigitalMotor(enablePort, forwardPort, backwardPort);
+        motor = new DigitalMotor(forwardPort, backwardPort, enablePort);
     }
     
     /**

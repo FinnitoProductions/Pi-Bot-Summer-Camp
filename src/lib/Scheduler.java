@@ -25,6 +25,7 @@ public class Scheduler {
 	 */
 	private Scheduler() {
 		runningCommands = Collections.newSetFromMap(new IdentityHashMap<>());
+		toRemove = new Stack<Command>();
 	}
 	
 	/**
