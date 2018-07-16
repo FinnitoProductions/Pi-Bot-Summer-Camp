@@ -69,26 +69,40 @@ public class TalonSRX extends PIDController
      */
     public void set(ControlMode mode, double magnitude)
     {
+        double output = 0;
         if (mode == ControlMode.PercentOutput)
         {
-            motor.setValue((float) magnitude);
+            output = magnitude;
         }
         else if (mode == ControlMode.Position)
         {
-            motor.setValue((float)getOutput(getSelectedSensorPosition(0), magnitude));
+            output = getOutput(getSelectedSensorPosition(0), magnitude);
         }
         else if (mode == ControlMode.Velocity)
         {
-            motor.setValue((float)getOutput(getSelectedSensorVelocity(0), magnitude));
+            output = getOutput(getSelectedSensorVelocity(0), magnitude);
             
         }
-        else if (mode == ControlMode.Disabled)
-            motor.setValue(0);
+        motor.setValue((float) output);
     }
     
     public void set(ControlMode mode, double magnitude, DemandType dt, double demandValue)
     {
-        set(mode, dt == DemandType.FeedForward ? magnitude + demandValue : magnitude);
+        double output = 0;
+        if (mode == ControlMode.PercentOutput)
+        {
+            output = magnitude;
+        }
+        else if (mode == ControlMode.Position)
+        {
+            output = getOutput(getSelectedSensorPosition(0), magnitude);
+        }
+        else if (mode == ControlMode.Velocity)
+        {
+            output = getOutput(getSelectedSensorVelocity(0), magnitude);
+            
+        }
+        motor.setValue((float) ((dt == DemandType.FeedForward) ? (output + demandValue) : output));
     }
     
     

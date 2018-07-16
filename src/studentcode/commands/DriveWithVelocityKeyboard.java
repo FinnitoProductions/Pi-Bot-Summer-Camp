@@ -24,6 +24,7 @@ public class DriveWithVelocityKeyboard extends Command
         isFinished = false;
         sc = new Scanner(System.in);
     }
+    
     public void execute()
     {
         double speed = 0;
@@ -39,6 +40,7 @@ public class DriveWithVelocityKeyboard extends Command
             turn = 1;
         else if (!value.equals(KeyboardCharacters.STOP))
         {
+            // hold previous value if not being told to stop
             speed = prevSpeed;
             turn = prevTurn;
         }
