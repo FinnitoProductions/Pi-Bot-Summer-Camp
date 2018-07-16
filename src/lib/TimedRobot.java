@@ -11,38 +11,57 @@ public abstract class TimedRobot
 {
     private int autonTime;
     private int teleopTime;
-    private static TimedRobot instance;
     
     public TimedRobot(int autonTimeMs, int teleopTimeMs)
     {
         this.autonTime = autonTimeMs;
         this.teleopTime = teleopTimeMs;
-        instance = new Robot();
     }
     
+    // move to Robot.java
     public static void main(String[] args)
     {
-        instance.run();
+        new Robot().run();
         System.exit(0);
     }
     
     public void run()
     {
-        instance.autonomousInit();
+        autonomousInit();
         long startTime = System.currentTimeMillis();
         while (true)
         {
             if (System.currentTimeMillis() - startTime < autonTime)
-                instance.autonomousPeriodic();
+            {
+                autonomousPeriodic();
+                try
+                {
+                    Thread.sleep(5l);
+                }
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
+            }
             else
                 break;
         }
-        instance.teleopInit();
+        teleopInit();
         startTime = System.currentTimeMillis();
         while (true)
         {
             if (System.currentTimeMillis() - startTime < teleopTime)
-                instance.teleopPeriodic();
+            {
+                teleopPeriodic();
+                try
+                {
+                    Thread.sleep(5l);
+                }
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
+            }
             else
                 break;
         }
@@ -53,9 +72,4 @@ public abstract class TimedRobot
     public abstract void autonomousPeriodic();
     public abstract void teleopInit();
     public abstract void teleopPeriodic();
-    
-    public TimedRobot getInstance()
-    {
-        return instance;
-    }
 }

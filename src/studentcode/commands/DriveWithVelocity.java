@@ -38,7 +38,7 @@ public class DriveWithVelocity extends Command
     @Override
     public void execute()
     {   
-        double speed = 0; // get keyboard input
+        double speed = 1; // get keyboard input
         double turn = 0; // get keyboard input
         Robot.getDrivetrain().arcadeDriveVelocity(speed, turn);
     }

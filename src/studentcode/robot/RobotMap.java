@@ -10,13 +10,13 @@ public class RobotMap
     public static final int AUTON_TIME_MS = 15000;
     public static final int TELEOP_TIME_MS = 135000;
     
-    public static final int LEFT_MOTOR_ENABLE = -1;
-    public static final int LEFT_MOTOR_FORWARD = -1;
-    public static final int LEFT_MOTOR_BACKWARD = -1;
+    public static final int LEFT_MOTOR_ENABLE = 23; //#32
+    public static final int LEFT_MOTOR_FORWARD = 16; //#23
+    public static final int LEFT_MOTOR_BACKWARD = 13; //#19
     
-    public static final int RIGHT_MOTOR_ENABLE = -1;
-    public static final int RIGHT_MOTOR_FORWARD = -1; 
-    public static final int RIGHT_MOTOR_BACKWARD = -1;
+    public static final int RIGHT_MOTOR_ENABLE = 26; //33 
+    public static final int RIGHT_MOTOR_FORWARD = 14; //10 
+    public static final int RIGHT_MOTOR_BACKWARD = 12; //21
     
     public static final int ARM_SERVO_GPIO = -1;
     public static final int CLAW_SERVO_GPIO = -1;
