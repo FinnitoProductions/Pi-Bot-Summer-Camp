@@ -3,6 +3,7 @@ package studentcode.commands;
 import java.util.Scanner;
 
 import lib.Command;
+import lib.ConsoleReader;
 import studentcode.robot.Robot;
 import studentcode.robot.RobotMap.KeyboardCharacters;
 
@@ -27,16 +28,16 @@ public class DriveWithVelocityKeyboard extends Command
     {
         double speed = 0;
         double turn = 0;
-        String nextLine = sc.nextLine();
-        if (nextLine.equals(KeyboardCharacters.FORWARD))
+        String value = ConsoleReader.getValue();
+        if (value.equals(KeyboardCharacters.FORWARD))
             speed = 1;
-        else if (nextLine.equals(KeyboardCharacters.BACKWARD))
+        else if (value.equals(KeyboardCharacters.BACKWARD))
             speed = -1;
-        else if (nextLine.equals(KeyboardCharacters.LEFT))
+        else if (value.equals(KeyboardCharacters.LEFT))
             turn = -1;
-        else if (nextLine.equals(KeyboardCharacters.RIGHT))
+        else if (value.equals(KeyboardCharacters.RIGHT))
             turn = 1;
-        else if (!nextLine.equals(KeyboardCharacters.STOP))
+        else if (!value.equals(KeyboardCharacters.STOP))
         {
             speed = prevSpeed;
             turn = prevTurn;
