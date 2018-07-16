@@ -20,4 +20,13 @@ public class RobotMap
     
     public static final int ARM_SERVO_GPIO = -1;
     public static final int CLAW_SERVO_GPIO = -1;
+    
+    public static class KeyboardCharacters
+    {
+        public static final String FORWARD = "w";
+        public static final String BACKWARD = "s";
+        public static final String LEFT = "a";
+        public static final String RIGHT = "d";
+        public static final String STOP = "o";
+    }
 }

@@ -34,7 +34,7 @@ public class Drivetrain extends Subsystem
     */
     public void initDefaultCommand()
     {
-        setDefaultCommand(new DriveWithVelocity());
+        setDefaultCommand(new DriveWithVelocityKeyboard());
     }
     
     public void arcadeDriveVelocity(double speed, double turn)
