@@ -1,0 +1,5 @@
+- BEC voltage regulator for R/C
+- Servo motors (MG996R)
+- Mini breadboard
+- Extra batteries
+- Battery chargers
