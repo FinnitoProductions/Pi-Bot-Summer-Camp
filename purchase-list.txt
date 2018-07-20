@@ -1,5 +1,5 @@
-- BEC voltage regulator for R/C
-- Servo motors (MG996R)
+- BEC voltage regulator for R/C (https://www.amazon.com/Servo-Helicopter-Airplane-Receiver-Supply/dp/B00VI0L94C/ref=sr_1_1?ie=UTF8&qid=1532066239&sr=8-1&keywords=BEC+5+volt)
+- Servo motors (MG996R - https://www.amazon.com/Micro-Helicopter-Airplane-Remote-Control/dp/B072V529YD/ref=sr_1_1_sspa?ie=UTF8&qid=1532066507&sr=8-1-spons&keywords=servo+motor&psc=1)
 - Mini breadboard
 - Extra batteries
 - Battery chargers
