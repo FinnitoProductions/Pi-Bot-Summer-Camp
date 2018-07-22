@@ -5,6 +5,7 @@ import lib.Subsystem;
 import lib.TalonSRX;
 import lib.TalonSRX.ControlMode;
 import lib.TalonSRX.DemandType;
+import lib.TalonSRX.FeedbackDevice;
 import studentcode.commands.*;
 import studentcode.robot.RobotMap;
 
@@ -32,6 +33,14 @@ public class Drivetrain extends Subsystem
                         RobotMap.RIGHT_MOTOR_BACKWARD);
     }
     
+    public void talonInit()
+    {
+        leftTalon.setupEncoder(RobotMap.LEFT_ENCODER_ORANGE, RobotMap.LEFT_ENCODER_BROWN);
+        rightTalon.setupEncoder(RobotMap.RIGHT_ENCODER_ORANGE, RobotMap.RIGHT_ENCODER_BROWN);
+        
+        leftTalon.configSelectedFeedbackSensor(FeedbackDevice.MagneticEncoder, RobotMap.PID_PRIMARY, RobotMap.TIMEOUT);
+        rightTalon.configSelectedFeedbackSensor(FeedbackDevice.MagneticEncoder, RobotMap.PID_PRIMARY, RobotMap.TIMEOUT);
+    }
     /**
     * Sets up the default command for this subsystem (the one which the subsystem will default to 
     * when no other commands are being sent).

@@ -66,6 +66,7 @@ public class TalonSRX extends PIDController
         initialPWMFrequency = 50;
         initialPulseWidthMs = 1f;
         motor = new Servo(port, initialPWMFrequency, initialPulseWidthMs);
+        initializeVariables();
     }
     
     /**

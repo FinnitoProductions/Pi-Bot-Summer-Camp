@@ -9,7 +9,6 @@ import studentcode.subsystems.*;
 
 public class Robot extends TimedRobot
 {
-    private DigitalMotor left, right;
     private static Drivetrain dt;
     private static Arm arm;
     private static Claw claw;
@@ -28,7 +27,7 @@ public class Robot extends TimedRobot
     @Override
     public void autonomousInit()
     {
-        // TODO Auto-generated method stub
+        getDrivetrain().talonInit();
     }
 
     /**

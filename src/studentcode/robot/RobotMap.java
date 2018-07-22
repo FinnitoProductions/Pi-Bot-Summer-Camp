@@ -31,6 +31,7 @@ public class RobotMap
     
     public static final int PID_PRIMARY = 0;
     public static final int PID_AUXILIARY = 1;
+    public static final int TIMEOUT = 10;
     
     public static class KeyboardCharacters
     {
