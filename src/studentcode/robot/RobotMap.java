@@ -20,11 +20,14 @@ public class RobotMap
     
     public static final int LEFT_ENCODER_ORANGE = 0;
     public static final int LEFT_ENCODER_BROWN = 2;
-    public static final int RIGHT_ENCODER_ORANGE = 28;
-    public static final int RIGHT_ENCODER_BROWN = 27;
+    public static final int RIGHT_ENCODER_ORANGE = 27;
+    public static final int RIGHT_ENCODER_BROWN = 28;
     
     public static final int ARM_SERVO_GPIO = -1;
     public static final int CLAW_SERVO_GPIO = -1;
+    
+    public static final double MAX_SPEED = 0.4;
+    public static final double MAX_TURN = 0.4;
     
     public static class KeyboardCharacters
     {
