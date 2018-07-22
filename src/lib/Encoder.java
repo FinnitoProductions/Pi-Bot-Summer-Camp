@@ -15,7 +15,7 @@ import com.pi4j.io.gpio.event.GpioPinListenerDigital;
  * @author Finn Frankis 
  * @version Jul 20, 2018
  */
-public class Encoder
+public class Encoder extends FeedbackSensor
 {
     private GpioPinDigitalInput orangeInput, brownInput;
     private int encoderCount;
@@ -53,9 +53,16 @@ public class Encoder
             }
                 });
     }
-    
-    public int getEncoderCount()
+ 
+
+    /**
+    * Gets the current sensor position.
+    * @return the current sensor position
+    */
+    @Override
+    public double getPosition()
     {
+        // TODO Auto-generated method stub
         return encoderCount;
     }
 }

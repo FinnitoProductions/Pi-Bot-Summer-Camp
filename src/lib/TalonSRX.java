@@ -1,13 +1,18 @@
 package lib;
 
+import java.security.InvalidParameterException;
+import java.util.List;
 import java.util.Map;
 
 import com.diozero.api.*;
 import com.diozero.sandpit.Servo;
+
+import studentcode.robot.RobotMap;
+
 import com.diozero.devices.sandpit.TB6612FNGMotor;
 
 /**
- * Represents a motor controller.
+ * Represents a motor controller to simulate the TalonSRX.
  * @author Finn Frankis
  * @version Jul 8, 2018
  */
@@ -15,8 +20,9 @@ public class TalonSRX extends PIDController
 {
     private int initialPWMFrequency;
     private float initialPulseWidthMs;
-    private double previousSensorPosition;
-    private double previousTime;
+
+    private FeedbackSensor[] selectedSensors;
+    private Map<FeedbackDevice, FeedbackSensor> sensors;
     
     public enum ControlMode
     {
@@ -46,6 +52,7 @@ public class TalonSRX extends PIDController
     {
         super (-1, 1);
         motor = new DigitalMotor(forwardPort, backwardPort, enablePort);
+        initializeVariables();
     }
     
     /**
@@ -62,7 +69,14 @@ public class TalonSRX extends PIDController
     }
     
     /**
-     * 
+     * Initializes variables which are independent of motor type.
+     */
+    private void initializeVariables()
+    {
+        selectedSensors = new FeedbackSensor[2];
+    }
+    /**
+     * Sets the Talon to a given output.
      * @param mode the type of control to be performed
      * on the talon (including percent output, velocity, and position)
      * @param magnitude the magnitude of the value to be set
@@ -76,16 +90,23 @@ public class TalonSRX extends PIDController
         }
         else if (mode == ControlMode.Position)
         {
-            output = getOutput(getSelectedSensorPosition(0), magnitude);
+            output = getOutput(getSelectedSensorPosition(RobotMap.PID_PRIMARY), magnitude);
         }
         else if (mode == ControlMode.Velocity)
         {
-            output = getOutput(getSelectedSensorVelocity(0), magnitude);
+            output = getOutput(getSelectedSensorVelocity(RobotMap.PID_PRIMARY), magnitude);
             
         }
         motor.setValue((float) output);
     }
     
+    /**
+     * Sets the Talon to a given output.
+     * @param mode the mode of control to be performed on the Talon (including % output, velocity, and position)
+     * @param magnitude the magnitude of the value to be set
+     * @param dt the demand type to be added to the output (like a feed forward or an auxiliary sensor value)
+     * @param demandValue the magnitude of the demand type
+     */
     public void set(ControlMode mode, double magnitude, DemandType dt, double demandValue)
     {
         double output = 0;
@@ -95,40 +116,62 @@ public class TalonSRX extends PIDController
         }
         else if (mode == ControlMode.Position)
         {
-            output = getOutput(getSelectedSensorPosition(0), magnitude);
+            output = getOutput(getSelectedSensorPosition(RobotMap.PID_PRIMARY), magnitude);
         }
         else if (mode == ControlMode.Velocity)
         {
-            output = getOutput(getSelectedSensorVelocity(0), magnitude);
+            output = getOutput(getSelectedSensorVelocity(RobotMap.PID_PRIMARY), magnitude);
             
         }
         motor.setValue((float) ((dt == DemandType.FeedForward) ? (output + demandValue) : output));
     }
     
+    public void setupEncoder (int orangePin, int brownPin)
+    {
+        sensors.put(FeedbackDevice.MagneticEncoder, new Encoder(orangePin, brownPin));
+    }
     
-    
+    /**
+     * Configures the feedback sensor to be selected for reading at a given PID loop, 
+     * provided it has been set up.
+     * @param fd the type of sensor to be selected (like MagneticEncoder)
+     * @param loopIndex the PID loop index (primary/auxiliary) [0,1]
+     * @param timeout the time after which the CAN command stops being attempted to send
+     */
     public void configSelectedFeedbackSensor(FeedbackDevice fd, int loopIndex, int timeout)
     {
-        
+        if (!sensors.containsKey(fd))
+            throw new InvalidParameterException ("Sensor has not been set up.");
+        selectedSensors[loopIndex] = sensors.get(fd);
     }
     
     /**
      * Gets the sensor position at the given loop index.
      * @param loopIndexthe PID loop index (primary/auxiliary) [0, 1]
      * @return the current sensor position
+     * @throws InterruptedException 
      */
     public double getSelectedSensorPosition (int loopIndex)
     {
-        return 0;
+        if (selectedSensors[loopIndex] == null)
+        {
+                throw new InvalidParameterException("A selected sensor has not been configured. Use configSelectedFeedbackSensor.");
+        }
+        return selectedSensors[loopIndex].getPosition();
     }
     
+    /**
+     * Gets the sensor velocity at the given loop index.
+     * @param loopIndex the PID loop index (primary/auxiliary) [0,1]
+     * @return the sensor velocity
+     */
     public double getSelectedSensorVelocity (int loopIndex)
     {
-        double currentVelocity = (getSelectedSensorPosition(0) - previousSensorPosition) 
-                / (System.currentTimeMillis() - previousTime);
-        previousSensorPosition = getSelectedSensorPosition(0);
-        previousTime = System.currentTimeMillis();
-        return currentVelocity;
+        if (selectedSensors[loopIndex] == null)
+        {
+                throw new InvalidParameterException("A selected sensor has not been configured. Use configSelectedFeedbackSensor.");
+        }
+        return selectedSensors[loopIndex].getVelocity();
     }
     
     public void setSelectedSensorPosition (int loopIndex)

@@ -29,6 +29,9 @@ public class RobotMap
     public static final double MAX_SPEED = 0.4;
     public static final double MAX_TURN = 0.4;
     
+    public static final int PID_PRIMARY = 0;
+    public static final int PID_AUXILIARY = 1;
+    
     public static class KeyboardCharacters
     {
         public static final String FORWARD = "w";

@@ -15,7 +15,7 @@ public class ConsoleReader
      * Returns the value currently being sent to the console.
      * @return the String value typed into the console; "" if a line is not currently being passed in
      */
-    public static String getValue ()
+    public static String getValue()
     {
         if (sc.hasNextLine())
             return sc.nextLine();
