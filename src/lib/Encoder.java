@@ -35,14 +35,21 @@ public class Encoder
             @Override
             public void handleGpioPinDigitalStateChangeEvent(GpioPinDigitalStateChangeEvent changeEvent)
             {
-                System.out.println("ORANGE: " + (changeEvent.getEdge().equals(PinEdge.RISING) ? 1 : -1));
+                if (!changeEvent.getEdge().equals(PinEdge.BOTH) && !changeEvent.getEdge().equals(PinEdge.NONE))
+                {
+                    encoderCount += (changeEvent.getEdge().equals(PinEdge.RISING) == brownInput.getState().equals(PinState.HIGH)) ? -1 : 1;
+                }
+                
             }
                 });
         brownInput.addListener(new GpioPinListenerDigital() {
             @Override
             public void handleGpioPinDigitalStateChangeEvent(GpioPinDigitalStateChangeEvent changeEvent)
             {
-                System.out.println("BROWN: " + (changeEvent.getEdge().equals(PinEdge.RISING) ? 1 : -1));
+                if (!changeEvent.getEdge().equals(PinEdge.BOTH) && !changeEvent.getEdge().equals(PinEdge.NONE))
+                {
+                    encoderCount += (changeEvent.getEdge().equals(PinEdge.RISING) == orangeInput.getState().equals(PinState.HIGH)) ? 1 : -1;
+                }
             }
                 });
     }
