@@ -1,6 +1,8 @@
 package studentcode.robot;
 
+
 import lib.DigitalMotor;
+import lib.Encoder;
 import lib.Scheduler;
 import lib.TimedRobot;
 import studentcode.subsystems.*;
@@ -47,7 +49,7 @@ public class Robot extends TimedRobot
     public void teleopInit()
     {
         // TODO Auto-generated method stub
-        
+        Encoder en = new Encoder (RobotMap.LEFT_ENCODER_ORANGE, RobotMap.LEFT_ENCODER_BROWN);
     }
 
     /**

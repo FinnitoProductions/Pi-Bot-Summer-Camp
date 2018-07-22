@@ -18,6 +18,11 @@ public class RobotMap
     public static final int RIGHT_MOTOR_FORWARD = 12; //10 
     public static final int RIGHT_MOTOR_BACKWARD = 14; //21
     
+    public static final int LEFT_ENCODER_ORANGE = 0;
+    public static final int LEFT_ENCODER_BROWN = 2;
+    public static final int RIGHT_ENCODER_ORANGE = 28;
+    public static final int RIGHT_ENCODER_BROWN = 27;
+    
     public static final int ARM_SERVO_GPIO = -1;
     public static final int CLAW_SERVO_GPIO = -1;
     
