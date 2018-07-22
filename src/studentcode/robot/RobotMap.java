@@ -1,7 +1,7 @@
 package studentcode.robot;
 
 /**
- * 
+ * Stores all of the important constants to be used.
  * @author Finn Frankis
  * @version Jul 8, 2018
  */

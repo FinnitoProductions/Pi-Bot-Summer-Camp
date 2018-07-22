@@ -1,8 +1,5 @@
 package studentcode.robot;
 
-
-import lib.DigitalMotor;
-import lib.Encoder;
 import lib.Scheduler;
 import lib.TimedRobot;
 import studentcode.subsystems.*;
@@ -41,7 +38,7 @@ public class Robot extends TimedRobot
     }
 
     /**
-    * 
+    * Called once when the teleoperated period begins.
     */
     @Override
     public void teleopInit()
@@ -50,12 +47,11 @@ public class Robot extends TimedRobot
     }
 
     /**
-    * 
+    * Called periodically during the teleoperated period.
     */
     @Override
     public void teleopPeriodic()
     {
-        // TODO Auto-generated method stub
         Scheduler.getInstance().run();
     }
     

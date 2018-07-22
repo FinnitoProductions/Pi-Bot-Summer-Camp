@@ -47,7 +47,7 @@ public abstract class TimedRobot
             if (System.currentTimeMillis() - startTime < autonTime)
             {
                 autonomousPeriodic();
-                Thread.sleep(5l);
+                Thread.sleep(5l); // pause to allow time for other operations
             }
             else
                 break;
@@ -60,7 +60,7 @@ public abstract class TimedRobot
             if (System.currentTimeMillis() - startTime < teleopTime)
             {
                 teleopPeriodic();
-                Thread.sleep(5l);
+                Thread.sleep(5l); // pause to allow time for other operations
             }
             else
                 break;

@@ -1,15 +1,11 @@
 package lib;
 
 import java.security.InvalidParameterException;
-import java.util.List;
 import java.util.Map;
 
 import com.diozero.api.*;
-import com.diozero.sandpit.Servo;
 
 import studentcode.robot.RobotMap;
-
-import com.diozero.devices.sandpit.TB6612FNGMotor;
 
 /**
  * Represents a motor controller to simulate the TalonSRX.
@@ -18,9 +14,6 @@ import com.diozero.devices.sandpit.TB6612FNGMotor;
  */
 public class TalonSRX extends PIDController
 {
-    private int initialPWMFrequency;
-    private float initialPulseWidthMs;
-
     private FeedbackSensor[] selectedSensors;
     private Map<FeedbackDevice, FeedbackSensor> sensors;
     
@@ -63,9 +56,7 @@ public class TalonSRX extends PIDController
     public TalonSRX(int port)
     {
         super (-1, 1);
-        initialPWMFrequency = 50;
-        initialPulseWidthMs = 1f;
-        motor = new Servo(port, initialPWMFrequency, initialPulseWidthMs);
+        motor = new Servo(port);
         initializeVariables();
     }
     
