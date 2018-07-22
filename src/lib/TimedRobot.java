@@ -19,14 +19,27 @@ public abstract class TimedRobot
     }
     
     // move to Robot.java
-    public static void main(String[] args)
+    public static void main(String[] args) throws InterruptedException
     {
         new Robot().run();
         System.exit(0);
     }
     
-    public void run()
+    public void run() throws InterruptedException
     {
+        System.out.println("Drivers behind the line.");
+        Thread.sleep(1200l);
+        System.out.println("Beginning in");
+        Thread.sleep(1200l);
+        System.out.println("3...");
+        Thread.sleep(1200l);
+        System.out.println("...2...");
+        Thread.sleep(1200l);
+        System.out.println("...1");
+        Thread.sleep(1200l);
+        System.out.println("POWER UP!");
+        
+        System.out.println("Autonomous period beginning.");
         autonomousInit();
         long startTime = System.currentTimeMillis();
         while (true)
@@ -34,18 +47,12 @@ public abstract class TimedRobot
             if (System.currentTimeMillis() - startTime < autonTime)
             {
                 autonomousPeriodic();
-                try
-                {
-                    Thread.sleep(5l);
-                }
-                catch (Exception e)
-                {
-                    e.printStackTrace();
-                }
+                Thread.sleep(5l);
             }
             else
                 break;
         }
+        System.out.println("Teleoperated period beginning.");
         teleopInit();
         startTime = System.currentTimeMillis();
         while (true)
@@ -53,14 +60,7 @@ public abstract class TimedRobot
             if (System.currentTimeMillis() - startTime < teleopTime)
             {
                 teleopPeriodic();
-                try
-                {
-                    Thread.sleep(5l);
-                }
-                catch (Exception e)
-                {
-                    e.printStackTrace();
-                }
+                Thread.sleep(5l);
             }
             else
                 break;
