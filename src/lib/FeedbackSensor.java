@@ -9,8 +9,16 @@ public abstract class FeedbackSensor
 {
     private double previousPosition;
     private double previousTime;
+    private double currentPosition;
    
-    public abstract double getPosition();
+    /**
+     * 
+     * @return
+     */
+    public double getPosition()
+    {
+        return currentPosition;
+    }
     
     public double getVelocity()
     {
@@ -26,5 +34,41 @@ public abstract class FeedbackSensor
         previousTime = currentTime;
         
         return velocity;
+    }
+    
+    /**
+     * Sets the sensor value to a new position. This should not be used to update the 
+     * position to reflect the most recent sensor reading, but instead for long-term offset or zeroing.
+     * @param newPosition the new sensor position
+     */
+    public void setPosition (double newPosition)
+    {
+        previousPosition = -1;
+        previousTime = -1;
+        currentPosition = newPosition;
+    }
+    
+    /**
+     * Adds to the sensor value a given value. This should be used to update the position to reflect
+     * the most recent sensor reading.
+     * @param offset the amount to be added
+     */
+    protected void addToPosition (double offset)
+    {
+        previousPosition = currentPosition;
+        previousTime = System.currentTimeMillis();
+        currentPosition += offset;
+    }
+    
+    /**
+     * Sets the sensor value to a given value. This should be used to update the position to reflect the most recent
+     * sensor reading. 
+     * @param position the new sensor position
+     */
+    protected void updatePosition (double position)
+    {
+        previousPosition = currentPosition;
+        previousTime = System.currentTimeMillis();
+        currentPosition = position;
     }
 }

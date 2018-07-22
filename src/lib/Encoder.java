@@ -11,18 +11,21 @@ import com.pi4j.io.gpio.event.GpioPinDigitalStateChangeEvent;
 import com.pi4j.io.gpio.event.GpioPinListenerDigital;
 
 /**
- * 
+ * Represents a magnetic encoder.
  * @author Finn Frankis 
  * @version Jul 20, 2018
  */
 public class Encoder extends FeedbackSensor
 {
     private GpioPinDigitalInput orangeInput, brownInput;
-    private int encoderCount;
-    
+
+    /**
+     * Constructs a new Encoder.
+     * @param orangePort the pin into which the orange encoder wire is plugged in
+     * @param brownPort the pin into which the brown encoder wire is plugged in
+     */
     public Encoder (int orangePort, int brownPort)
     {        
-        encoderCount = 0;
         GpioController currentController = GpioFactory.getInstance();
         
         orangeInput = currentController.provisionDigitalInputPin(RaspiPin.getPinByAddress(orangePort), PinPullResistance.PULL_DOWN);
@@ -37,32 +40,20 @@ public class Encoder extends FeedbackSensor
             {
                 if (!changeEvent.getEdge().equals(PinEdge.BOTH) && !changeEvent.getEdge().equals(PinEdge.NONE))
                 {
-                    encoderCount += (changeEvent.getEdge().equals(PinEdge.RISING) == brownInput.getState().equals(PinState.HIGH)) ? -1 : 1;
+                    addToPosition((changeEvent.getEdge().equals(PinEdge.RISING) == brownInput.getState().equals(PinState.HIGH)) ? -1 : 1);
                 }
                 
             }
-                });
+        });
         brownInput.addListener(new GpioPinListenerDigital() {
             @Override
             public void handleGpioPinDigitalStateChangeEvent(GpioPinDigitalStateChangeEvent changeEvent)
             {
                 if (!changeEvent.getEdge().equals(PinEdge.BOTH) && !changeEvent.getEdge().equals(PinEdge.NONE))
                 {
-                    encoderCount += (changeEvent.getEdge().equals(PinEdge.RISING) == orangeInput.getState().equals(PinState.HIGH)) ? 1 : -1;
+                    addToPosition(changeEvent.getEdge().equals(PinEdge.RISING) == orangeInput.getState().equals(PinState.HIGH) ? 1 : -1);
                 }
             }
-                });
-    }
- 
-
-    /**
-    * Gets the current sensor position.
-    * @return the current sensor position
-    */
-    @Override
-    public double getPosition()
-    {
-        // TODO Auto-generated method stub
-        return encoderCount;
+        });
     }
 }
