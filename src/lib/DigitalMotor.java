@@ -10,6 +10,7 @@ import com.pi4j.io.gpio.GpioPinPwmOutput;
 import com.pi4j.io.gpio.PinPullResistance;
 import com.pi4j.io.gpio.PinState;
 import com.pi4j.io.gpio.RaspiPin;
+import com.pi4j.wiringpi.Gpio;
 
 /**
  * @author joel & Finn Frankis
@@ -18,18 +19,23 @@ public class DigitalMotor implements com.diozero.api.OutputDeviceInterface {
 	
 	private GpioPinDigitalOutput forward, backward;
 	private GpioPinPwmOutput enable;
+	
 	/**
-	 * @param rightForward
-	 * @param rightBackward
+	 * Constructs a new DigitalMotor.
+	 * @param forward the forward digital pin (for forward direction), in WiringPi convention 
+	 * @param backward the backward digital pin (for backward motion), in WiringPi convention 
+	 * @param enable the enable analog pin, giving the magnitude of the speed
 	 */
 	public DigitalMotor(int forward, int backward, int enable) {
 		GpioController gpio = GpioFactory.getInstance();
 		this.forward = gpio.provisionDigitalOutputPin(RaspiPin.getPinByAddress(forward));
 		this.backward = gpio.provisionDigitalOutputPin(RaspiPin.getPinByAddress(backward));
 		this.enable = gpio.provisionPwmOutputPin(RaspiPin.getPinByAddress(enable));
-		com.pi4j.wiringpi.Gpio.pwmSetMode(com.pi4j.wiringpi.Gpio.PWM_MODE_MS);
-		com.pi4j.wiringpi.Gpio.pwmSetRange(1024);
-		com.pi4j.wiringpi.Gpio.pwmSetClock(1024);
+		
+		Gpio.pwmSetMode(Gpio.PWM_MODE_MS);
+		Gpio.pwmSetRange(1024);
+		Gpio.pwmSetClock(1024);
+		
 		this.forward.setShutdownOptions(true, PinState.LOW, PinPullResistance.OFF);
 		this.backward.setShutdownOptions(true, PinState.LOW, PinPullResistance.OFF);
 		this.enable.setShutdownOptions(true, PinState.LOW, PinPullResistance.OFF);
@@ -37,6 +43,7 @@ public class DigitalMotor implements com.diozero.api.OutputDeviceInterface {
 	
 
     /**
+    * Sets the motor to operate at a given speed.
     * @param speed the speed at which the motors should be set
     */
     @Override
