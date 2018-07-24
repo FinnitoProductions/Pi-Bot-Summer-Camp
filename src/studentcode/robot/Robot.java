@@ -4,6 +4,11 @@ import lib.Scheduler;
 import lib.TimedRobot;
 import studentcode.subsystems.*;
 
+/**
+ * 
+ * @author Finn Frankis
+ * @version Jul 8, 2018
+ */
 public class Robot extends TimedRobot
 {
     private static Drivetrain dt;
@@ -43,7 +48,6 @@ public class Robot extends TimedRobot
     @Override
     public void teleopInit()
     {
-        // TODO Auto-generated method stub
     }
 
     /**
