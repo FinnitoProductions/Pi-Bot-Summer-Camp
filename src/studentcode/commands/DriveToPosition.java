@@ -1,6 +1,8 @@
 package studentcode.commands;
 
 import lib.Command;
+import lib.TalonSRX.ControlMode;
+import studentcode.robot.Robot;
 
 /**
  * Drives the robot to a given position.
@@ -9,7 +11,12 @@ import lib.Command;
  */
 public class DriveToPosition extends Command
 {
-
+    private double position;
+    public DriveToPosition(double position)
+    {
+        requires (Robot.getDrivetrain());
+        this.position = position;
+    }
     /**
     * @return
     */
@@ -26,8 +33,8 @@ public class DriveToPosition extends Command
     @Override
     protected void initialize()
     {
-        // TODO Auto-generated method stub
-        
+        Robot.getDrivetrain().getLeftTalon().set(ControlMode.Position, position);
+        Robot.getDrivetrain().getRightTalon().set(ControlMode.Position, position);
     }
 
     /**

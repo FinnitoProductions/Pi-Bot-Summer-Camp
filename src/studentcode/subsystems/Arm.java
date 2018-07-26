@@ -20,14 +20,7 @@ public class Arm extends Subsystem
     {
         servoArm = new TalonSRX(RobotMap.ARM_SERVO_GPIO);
     }
-    /**
-    * 
-    */
-    @Override
-    public void initDefaultCommand()
-    {
-        setDefaultCommand(new MoveArmVelocity());
-    }
+
     
     public static Arm getInstance()
     {
@@ -44,9 +37,15 @@ public class Arm extends Subsystem
     {
         return servoArm;
     }
-    public void setServoArm(TalonSRX servoArm)
+
+
+    /**
+    * 
+    */
+    @Override
+    public void initDefaultCommand()
     {
-        this.servoArm = servoArm;
+        // TODO Auto-generated method stub
+        
     }
-    
 }

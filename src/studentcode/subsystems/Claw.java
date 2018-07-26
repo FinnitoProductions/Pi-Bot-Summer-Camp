@@ -2,7 +2,7 @@ package studentcode.subsystems;
 
 import lib.Subsystem;
 import lib.TalonSRX;
-import studentcode.commands.MoveClawVelocity;
+import studentcode.commands.MoveClawPosition;
 import studentcode.robot.RobotMap;
 
 /**
@@ -27,7 +27,6 @@ public class Claw extends Subsystem
     @Override
     public void initDefaultCommand()
     {
-        setDefaultCommand(new MoveClawVelocity());
     }
     
     public static Claw getInstance()

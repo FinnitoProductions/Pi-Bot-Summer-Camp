@@ -9,11 +9,13 @@ import studentcode.robot.Robot;
  * @author Finn Frankis
  * @version Jul 9, 2018
  */
-public class MoveClawVelocity extends Command
+public class MoveClawPosition extends Command
 {
-    public MoveClawVelocity()
+    private double position;
+    public MoveClawPosition(double position)
     {
         requires(Robot.getClaw());
+        this.position = position;
     }
 
     /**
@@ -22,8 +24,7 @@ public class MoveClawVelocity extends Command
     @Override
     public boolean isFinished()
     {
-        // TODO Auto-generated method stub
-        return false;
+        return true;
     }
 
     /**
@@ -32,8 +33,7 @@ public class MoveClawVelocity extends Command
     @Override
     public void initialize()
     {
-        // TODO Auto-generated method stub
-        
+        Robot.getClaw().getClawTalon().set(ControlMode.Position, position);   
     }
 
     /**
@@ -42,9 +42,6 @@ public class MoveClawVelocity extends Command
     @Override
     public void execute()
     {
-        // TODO Auto-generated method stub
-        double actuateSpeed = 0; // get keyboard input
-        Robot.getClaw().getClawTalon().set(ControlMode.PercentOutput, actuateSpeed);
     }
 
     /**

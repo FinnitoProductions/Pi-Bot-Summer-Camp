@@ -1,6 +1,7 @@
 package studentcode.commands;
 
 import lib.Command;
+import lib.TalonSRX.ControlMode;
 import studentcode.robot.Robot;
 
 /**
@@ -10,9 +11,11 @@ import studentcode.robot.Robot;
  */
 public class MoveArmPosition extends Command
 {
-    public MoveArmPosition()
+    private double position;
+    public MoveArmPosition(double position)
     {
         requires (Robot.getArm());
+        this.position = position;
     }
     /**
     * @return
@@ -20,8 +23,7 @@ public class MoveArmPosition extends Command
     @Override
     public boolean isFinished()
     {
-        // TODO Auto-generated method stub
-        return false;
+        return true;
     }
 
     /**
@@ -30,8 +32,7 @@ public class MoveArmPosition extends Command
     @Override
     public void initialize()
     {
-        // TODO Auto-generated method stub
-        
+        Robot.getArm().getServoArm().set(ControlMode.Position, position);
     }
 
     /**
