@@ -33,8 +33,6 @@ public class MoveArmPosition extends Command
     @Override
     public void initialize()
     {
-        System.out.println("NEW CODE");
-        System.out.println(Robot.getArm());
     }
 
     /**
@@ -43,7 +41,7 @@ public class MoveArmPosition extends Command
     @Override
     public void execute()
     {
-        Arm.getInstance().getServoArm().set(ControlMode.Position, position);
+        Robot.getArm().setArmPercent(position);
     }
 
     /**

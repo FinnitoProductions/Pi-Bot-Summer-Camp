@@ -36,7 +36,7 @@ public class MoveArmPositionKeyboard extends Command
         {
             turn = prevTurn;
         }
-        Robot.getArm().getServoArm().set(ControlMode.Position, turn);
+        Robot.getArm().setArmPercent(turn);
         prevTurn = turn;
             
     }

@@ -2,6 +2,7 @@ package studentcode.subsystems;
 
 import lib.Subsystem;
 import lib.TalonSRX;
+import lib.TalonSRX.ControlMode;
 import studentcode.commands.*;
 import studentcode.robot.RobotMap;
 
@@ -33,9 +34,27 @@ public class Arm extends Subsystem
     {
         
     }
-    public TalonSRX getServoArm()
+    public TalonSRX getServo()
     {
         return servoArm;
+    }
+    
+    /**
+     * Sets the arm to a given position.
+     * @param position the position for the servo [0, 1023]
+     */
+    public void setPosition (double position)
+    {
+        servoArm.set(ControlMode.Position, position);
+    }
+    
+    /**
+     * Sets the arm to a given percentage output.
+     * @param pOutput the percentage to which the servo should turn [0, 1]
+     */
+    public void setArmPercent(double pOutput)
+    {
+        servoArm.set(ControlMode.PercentOutput, pOutput);
     }
 
 
