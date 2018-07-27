@@ -32,7 +32,7 @@ public class Servo implements OutputDeviceInterface
         
         Gpio.pwmSetMode(Gpio.PWM_MODE_MS);
         Gpio.pwmSetRange(1024);
-        Gpio.pwmSetClock(1);
+        Gpio.pwmSetClock(192);
 
         servoPort.setShutdownOptions(true, PinState.LOW, PinPullResistance.OFF);
     }
@@ -44,6 +44,7 @@ public class Servo implements OutputDeviceInterface
     @Override
     public void setValue(float value)
     {
+        System.out.println("SERVO OUTPUT : " + (value * 1023));
         servoPort.setPwm((int) (value * 1023));
     }
 }

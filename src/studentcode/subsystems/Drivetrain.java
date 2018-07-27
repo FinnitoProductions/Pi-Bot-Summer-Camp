@@ -1,6 +1,7 @@
 
 package studentcode.subsystems;
 
+import lib.InstantCommand;
 import lib.Subsystem;
 import lib.TalonSRX;
 import lib.TalonSRX.ControlMode;
@@ -25,12 +26,12 @@ public class Drivetrain extends Subsystem
      */
     public Drivetrain()
     {
-        leftTalon = new TalonSRX(RobotMap.LEFT_MOTOR_ENABLE, 
+        /*leftTalon = new TalonSRX(RobotMap.LEFT_MOTOR_ENABLE, 
                         RobotMap.LEFT_MOTOR_FORWARD, 
                         RobotMap.LEFT_MOTOR_BACKWARD);
         rightTalon = new TalonSRX(RobotMap.RIGHT_MOTOR_ENABLE, 
                         RobotMap.RIGHT_MOTOR_FORWARD, 
-                        RobotMap.RIGHT_MOTOR_BACKWARD);
+                        RobotMap.RIGHT_MOTOR_BACKWARD);*/
     }
     
     public void talonInit()
@@ -47,7 +48,15 @@ public class Drivetrain extends Subsystem
     */
     public void initDefaultCommand()
     {
-        setDefaultCommand(new DriveWithVelocityKeyboard());
+        //setDefaultCommand(new DriveWithVelocityKeyboard());
+        setDefaultCommand (new InstantCommand() {
+
+            @Override
+            protected void initialize()
+            {
+            }
+            
+        });
     }
     
     /**

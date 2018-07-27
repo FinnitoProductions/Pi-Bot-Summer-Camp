@@ -1,7 +1,6 @@
 package studentcode.commands;
 
 import java.time.ZoneId;
-import java.time.chrono.ThaiBuddhistChronology;
 import java.util.Scanner;
 
 import lib.Command;
@@ -26,12 +25,12 @@ public class MoveArmPositionKeyboard extends Command
         double turn = 0;
         String value = ConsoleReader.getValue();
         if (value.equals(KeyboardCharacters.SERVO_MAX_UP))
-            turn = 1;
+            turn = 1020;
         else if (value.equals(KeyboardCharacters.SERVO_MAX_DOWN))
-            turn = 0;
+            turn = 90;
         else if (!value.equals(KeyboardCharacters.STOP))
             turn = prevTurn;
-        Robot.getArm().setArmPercent(turn);
+        Robot.getArm().setPosition(turn);
         prevTurn = turn;
             
     }

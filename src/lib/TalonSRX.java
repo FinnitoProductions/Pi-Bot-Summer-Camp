@@ -8,6 +8,7 @@ import com.diozero.api.*;
 
 import studentcode.robot.RobotMap;
 
+
 /**
  * Represents a motor controller to simulate the TalonSRX.
  * @author Finn Frankis
@@ -57,7 +58,7 @@ public class TalonSRX extends PIDController
     public TalonSRX(int port)
     {
         super (-1, 1);
-        motor = new Servo(port);
+        motor = new Servo(RobotMap.ARM_SERVO_GPIO);
         initializeVariables();
     }
     

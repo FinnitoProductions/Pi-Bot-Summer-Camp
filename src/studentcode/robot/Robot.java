@@ -18,7 +18,6 @@ public class Robot extends TimedRobot
     public Robot()
     {
         super(RobotMap.AUTON_TIME_MS, RobotMap.TELEOP_TIME_MS);
-        //claw = Claw.getInstance();
     }
 
     /**
@@ -78,7 +77,7 @@ public class Robot extends TimedRobot
     @Override
     public void robotInit()
     {
-        //dt = Drivetrain.getInstance();
+        dt = Drivetrain.getInstance();
         arm = Arm.getInstance();
     }
 
