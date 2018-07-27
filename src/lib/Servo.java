@@ -26,12 +26,14 @@ public class Servo implements OutputDeviceInterface
     {
         GpioController gpio = GpioFactory.getInstance();
         
-        servoPort = gpio.provisionSoftPwmOutputPin(RaspiPin.getPinByAddress(pin));
-
+        //servoPort = gpio.provisionSoftPwmOutputPin(RaspiPin.getPinByAddress(pin));
+        
+        servoPort = gpio.provisionPwmOutputPin(RaspiPin.getPinByAddress(pin));
+        
         Gpio.pwmSetMode(Gpio.PWM_MODE_MS);
         Gpio.pwmSetRange(1024);
-        Gpio.pwmSetClock(1024);
-        
+        Gpio.pwmSetClock(1);
+
         servoPort.setShutdownOptions(true, PinState.LOW, PinPullResistance.OFF);
     }
 

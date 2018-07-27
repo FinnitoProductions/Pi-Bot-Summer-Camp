@@ -27,7 +27,7 @@ public class Robot extends TimedRobot
     @Override
     public void autonomousInit()
     {
-        getDrivetrain().talonInit();
+        //getDrivetrain().talonInit();
     }
 
     /**
@@ -78,7 +78,7 @@ public class Robot extends TimedRobot
     @Override
     public void robotInit()
     {
-        dt = Drivetrain.getInstance();
+        //dt = Drivetrain.getInstance();
         arm = Arm.getInstance();
     }
 
