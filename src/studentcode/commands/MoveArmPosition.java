@@ -3,6 +3,7 @@ package studentcode.commands;
 import lib.Command;
 import lib.TalonSRX.ControlMode;
 import studentcode.robot.Robot;
+import studentcode.subsystems.Arm;
 
 /**
  * 
@@ -32,7 +33,8 @@ public class MoveArmPosition extends Command
     @Override
     public void initialize()
     {
-        Robot.getArm().getServoArm().set(ControlMode.Position, position);
+        System.out.println("NEW CODE");
+        System.out.println(Robot.getArm());
     }
 
     /**
@@ -41,8 +43,7 @@ public class MoveArmPosition extends Command
     @Override
     public void execute()
     {
-        // TODO Auto-generated method stub
-        
+        Arm.getInstance().getServoArm().set(ControlMode.Position, position);
     }
 
     /**

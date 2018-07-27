@@ -45,7 +45,7 @@ public class Arm extends Subsystem
     @Override
     public void initDefaultCommand()
     {
-        // TODO Auto-generated method stub
+        setDefaultCommand(new MoveArmPosition(0.9));
         
     }
 }

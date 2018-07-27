@@ -19,7 +19,7 @@ public class Robot extends TimedRobot
     {
         super(RobotMap.AUTON_TIME_MS, RobotMap.TELEOP_TIME_MS);
         dt = Drivetrain.getInstance();
-        //arm = Arm.getInstance();
+        arm = Arm.getInstance();
         //claw = Claw.getInstance();
     }
 
@@ -29,7 +29,7 @@ public class Robot extends TimedRobot
     @Override
     public void autonomousInit()
     {
-        getDrivetrain().talonInit();
+        //getDrivetrain().talonInit();
     }
 
     /**
