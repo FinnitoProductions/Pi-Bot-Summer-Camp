@@ -38,27 +38,24 @@ public abstract class TimedRobot
         System.out.println("...1");
         Thread.sleep(1200l);
         System.out.println("POWER UP!");
-        
+        robotInit();
         System.out.println("Autonomous period beginning.");
         autonomousInit();
         long startTime = System.currentTimeMillis();
         while (System.currentTimeMillis() - startTime < autonTime)
         {
             autonomousPeriodic();
+            robotPeriodic();
             Thread.sleep(5l); // pause to allow time for other operations
         }
         System.out.println("Teleoperated period beginning.");
         teleopInit();
         startTime = System.currentTimeMillis();
-        while (true)
+        while (System.currentTimeMillis() - startTime < teleopTime)
         {
-            if (System.currentTimeMillis() - startTime < teleopTime)
-            {
-                teleopPeriodic();
-                Thread.sleep(5l); // pause to allow time for other operations
-            }
-            else
-                break;
+            teleopPeriodic();
+            robotPeriodic();
+            Thread.sleep(5l); // pause to allow time for other operation
         }
         
     }
@@ -67,4 +64,6 @@ public abstract class TimedRobot
     public abstract void autonomousPeriodic();
     public abstract void teleopInit();
     public abstract void teleopPeriodic();
+    public abstract void robotInit();
+    public abstract void robotPeriodic();
 }

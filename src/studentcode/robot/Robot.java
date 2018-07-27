@@ -73,5 +73,25 @@ public class Robot extends TimedRobot
     {
         return claw;
     }
+
+    /**
+    * 
+    */
+    @Override
+    public void robotInit()
+    {
+        // TODO Auto-generated method stub
+        
+    }
+
+    /**
+    * 
+    */
+    @Override
+    public void robotPeriodic()
+    {
+        // TODO Auto-generated method stub
+        
+    }
  
 }
