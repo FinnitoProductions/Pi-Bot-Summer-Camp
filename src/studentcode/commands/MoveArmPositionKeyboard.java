@@ -18,6 +18,10 @@ public class MoveArmPositionKeyboard extends Command
 {
     private double prevTurn;
     
+    public MoveArmPositionKeyboard()
+    {
+        requires(Robot.getArm());
+    }
     public void execute()
     {
         double turn = 0;
