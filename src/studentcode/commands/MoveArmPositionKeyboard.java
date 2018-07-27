@@ -25,7 +25,7 @@ public class MoveArmPositionKeyboard extends Command
         double turn = 0;
         String value = ConsoleReader.getValue();
         if (value.equals(KeyboardCharacters.SERVO_MAX_UP))
-            turn = 1020;
+            turn = 130;
         else if (value.equals(KeyboardCharacters.SERVO_MAX_DOWN))
             turn = 90;
         else if (!value.equals(KeyboardCharacters.STOP))
