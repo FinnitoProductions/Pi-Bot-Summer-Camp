@@ -42,15 +42,10 @@ public abstract class TimedRobot
         System.out.println("Autonomous period beginning.");
         autonomousInit();
         long startTime = System.currentTimeMillis();
-        while (true)
+        while (System.currentTimeMillis() - startTime < autonTime)
         {
-            if (System.currentTimeMillis() - startTime < autonTime)
-            {
-                autonomousPeriodic();
-                Thread.sleep(5l); // pause to allow time for other operations
-            }
-            else
-                break;
+            autonomousPeriodic();
+            Thread.sleep(5l); // pause to allow time for other operations
         }
         System.out.println("Teleoperated period beginning.");
         teleopInit();
