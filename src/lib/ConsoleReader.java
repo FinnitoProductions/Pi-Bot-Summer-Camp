@@ -1,5 +1,9 @@
 package lib;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.util.Scanner;
 
 /**
@@ -9,25 +13,27 @@ import java.util.Scanner;
  */
 public class ConsoleReader
 {
-    private static Scanner sc = new Scanner(System.in);
+    private static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    private static String prevValue = "";
     
     /**
      * Returns the value currently being sent to the console.
-     * @return the String value typed into the console; "" if a line is not currently being passed in
+     * @return the String value typed into the console
      */
     public static String getValue()
-    {
-        if (sc.hasNextLine())
-            return sc.nextLine();
-        return "";
-    }
-    
-    /**
-     * Waits for a line to be sent to the console.
-     * @return the value sent to the console, once it is sent
-     */
-    public static String getValueHold()
-    {
-        return sc.nextLine();
+    {   
+        try
+        {
+            if (br.ready())
+            {
+                String currentLine = br.readLine();
+                prevValue = currentLine != null ? currentLine : "";
+            }
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        return prevValue;
     }
 }
