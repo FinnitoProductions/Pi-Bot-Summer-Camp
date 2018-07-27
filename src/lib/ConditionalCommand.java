@@ -30,7 +30,7 @@ public abstract class ConditionalCommand extends Command {
 	private Command running;
 	
 	/**
-	 * Creates a new ConditionalCommand with given onTrue and onFalse Commands.
+	 * Creates a new ConditionalCommand with a given onTrue Command.
 	 *
 	 * <p>
 	 * Users of this constructor should also override condition().

@@ -128,4 +128,9 @@ public abstract class Command {
 	public boolean isRunning() {
 		return Scheduler.getInstance().isRunning(this);
 	}
+	
+	public String toString()
+	{
+	    return this.getClass().getName();
+	}
 }

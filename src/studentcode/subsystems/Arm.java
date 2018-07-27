@@ -13,7 +13,7 @@ import studentcode.robot.RobotMap;
  */
 public class Arm extends Subsystem
 {
-    private static Arm arm;
+    private static Arm arm = new Arm();
 
     private TalonSRX servoArm;
     

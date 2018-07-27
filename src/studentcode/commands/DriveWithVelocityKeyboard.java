@@ -19,10 +19,6 @@ public class DriveWithVelocityKeyboard extends Command
     private double prevSpeed;
     private double prevTurn;
     
-    public DriveWithVelocityKeyboard()
-    {
-        requires (Robot.getDrivetrain());
-    }
     public void initialize()
     {
         isFinished = false;

@@ -1,6 +1,7 @@
 package lib;
 
 import java.security.InvalidParameterException;
+import java.util.HashMap;
 import java.util.Map;
 
 import com.diozero.api.*;
@@ -66,6 +67,7 @@ public class TalonSRX extends PIDController
     private void initializeVariables()
     {
         selectedSensors = new FeedbackSensor[2];
+        sensors = new HashMap<FeedbackDevice, FeedbackSensor>();
     }
     /**
      * Sets the Talon to a given output.
@@ -108,21 +110,26 @@ public class TalonSRX extends PIDController
      */
     public void set(ControlMode mode, double magnitude, DemandType dt, double demandValue)
     {
-        double output = 0;
-        if (mode == ControlMode.PercentOutput)
+        if (!(motor instanceof Servo))
         {
-            output = magnitude;
+            double output = 0;
+            if (mode == ControlMode.PercentOutput)
+            {
+                output = magnitude;
+            }
+            else if (mode == ControlMode.Position)
+            {
+                output = getOutput(getSelectedSensorPosition(RobotMap.PID_PRIMARY, RobotMap.TIMEOUT), magnitude);
+            }
+            else if (mode == ControlMode.Velocity)
+            {
+                output = getOutput(getSelectedSensorVelocity(RobotMap.PID_PRIMARY, RobotMap.TIMEOUT), magnitude);
+                
+            }
+            motor.setValue((float) ((dt == DemandType.FeedForward) ? (output + demandValue) : output));
         }
-        else if (mode == ControlMode.Position)
-        {
-            output = getOutput(getSelectedSensorPosition(RobotMap.PID_PRIMARY, RobotMap.TIMEOUT), magnitude);
-        }
-        else if (mode == ControlMode.Velocity)
-        {
-            output = getOutput(getSelectedSensorVelocity(RobotMap.PID_PRIMARY, RobotMap.TIMEOUT), magnitude);
-            
-        }
-        motor.setValue((float) ((dt == DemandType.FeedForward) ? (output + demandValue) : output));
+        else
+            throw new RuntimeException("Demand types not supported for Servo motors.");
     }
     
     public void setupEncoder (int orangePin, int brownPin)
