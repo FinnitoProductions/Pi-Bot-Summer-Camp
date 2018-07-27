@@ -40,5 +40,7 @@ public class RobotMap
         public static final String LEFT = "a";
         public static final String RIGHT = "d";
         public static final String STOP = "o";
+        public static final String SERVO_MAX_UP = "r";
+        public static final String SERVO_MAX_DOWN = "f";
     }
 }

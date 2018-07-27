@@ -18,12 +18,10 @@ public class DriveWithVelocityKeyboard extends Command
     private boolean isFinished;
     private double prevSpeed;
     private double prevTurn;
-    private Scanner sc;
     
     public void initialize()
     {
         isFinished = false;
-        sc = new Scanner(System.in);
     }
     
     public void execute()
@@ -61,6 +59,5 @@ public class DriveWithVelocityKeyboard extends Command
     @Override
     protected void end()
     {
-        sc.close();
     }
 }

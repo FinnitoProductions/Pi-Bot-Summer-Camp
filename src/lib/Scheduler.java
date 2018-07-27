@@ -86,7 +86,7 @@ public class Scheduler {
 				e.printStackTrace();
 			}
 			for(Subsystem s : c.getRequired())
-				if(s.getDefaultCommand() != null)
+				if(s != null && s.getDefaultCommand() != null)
 					add(s.getDefaultCommand());
 		}
 	}
