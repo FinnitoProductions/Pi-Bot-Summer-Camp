@@ -83,14 +83,14 @@ public class TalonSRX extends PIDController
         else if (mode == ControlMode.Position)
         {
             if (motor instanceof DigitalMotor)
-                output = getOutput(getSelectedSensorPosition(RobotMap.PID_PRIMARY), magnitude);
+                output = getOutput(getSelectedSensorPosition(RobotMap.PID_PRIMARY, RobotMap.TIMEOUT), magnitude);
             else if (motor instanceof Servo)
                 output = MathUtil.map(magnitude, 0, 1023, 0, 1);
         }
         else if (mode == ControlMode.Velocity)
         {
             if (motor instanceof DigitalMotor)
-                output = getOutput(getSelectedSensorVelocity(RobotMap.PID_PRIMARY), magnitude);
+                output = getOutput(getSelectedSensorVelocity(RobotMap.PID_PRIMARY, RobotMap.TIMEOUT), magnitude);
             else
                 throw new RuntimeException("Velocity control mode only supported for digital motors.");
             
@@ -115,11 +115,11 @@ public class TalonSRX extends PIDController
         }
         else if (mode == ControlMode.Position)
         {
-            output = getOutput(getSelectedSensorPosition(RobotMap.PID_PRIMARY), magnitude);
+            output = getOutput(getSelectedSensorPosition(RobotMap.PID_PRIMARY, RobotMap.TIMEOUT), magnitude);
         }
         else if (mode == ControlMode.Velocity)
         {
-            output = getOutput(getSelectedSensorVelocity(RobotMap.PID_PRIMARY), magnitude);
+            output = getOutput(getSelectedSensorVelocity(RobotMap.PID_PRIMARY, RobotMap.TIMEOUT), magnitude);
             
         }
         motor.setValue((float) ((dt == DemandType.FeedForward) ? (output + demandValue) : output));
@@ -146,11 +146,11 @@ public class TalonSRX extends PIDController
     
     /**
      * Gets the sensor position at the given loop index.
-     * @param loopIndexthe PID loop index (primary/auxiliary) [0, 1]
+     * @param loopIndex the PID loop index (primary/auxiliary) [0, 1]
      * @return the current sensor position
      * @throws InterruptedException 
      */
-    public double getSelectedSensorPosition (int loopIndex)
+    public double getSelectedSensorPosition (int loopIndex, int timeout)
     {
         if (selectedSensors[loopIndex] == null)
         {
@@ -164,7 +164,7 @@ public class TalonSRX extends PIDController
      * @param loopIndex the PID loop index (primary/auxiliary) [0,1]
      * @return the sensor velocity
      */
-    public double getSelectedSensorVelocity (int loopIndex)
+    public double getSelectedSensorVelocity (int loopIndex, int timeout)
     {
         if (selectedSensors[loopIndex] == null)
         {
@@ -173,8 +173,8 @@ public class TalonSRX extends PIDController
         return selectedSensors[loopIndex].getVelocity();
     }
     
-    public void setSelectedSensorPosition (int loopIndex)
+    public void setSelectedSensorPosition (double sensorValue, int loopIndex, int timeout)
     {
-        
+        selectedSensors[loopIndex].setPosition(sensorValue);
     }
 }
