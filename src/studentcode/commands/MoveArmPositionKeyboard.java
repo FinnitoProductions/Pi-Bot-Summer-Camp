@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import lib.Command;
 import lib.ConsoleReader;
+import lib.MathUtil;
 import lib.TalonSRX.ControlMode;
 import studentcode.robot.Robot;
 import studentcode.robot.RobotMap;
@@ -20,6 +21,10 @@ public class MoveArmPositionKeyboard extends Command
 {
     private double prevTurn; 
    
+    public MoveArmPositionKeyboard()
+    {
+        prevTurn = RobotMap.ARM_INTAKE_ANGLE;
+    }
     public void execute()
     {
         double turn = 0;
@@ -28,24 +33,12 @@ public class MoveArmPositionKeyboard extends Command
             turn = RobotMap.ARM_OUTTAKE_ANGLE; 
         else if (value.equals(KeyboardCharacters.ARM_INTAKE))
             turn = RobotMap.ARM_INTAKE_ANGLE;
-        else if (!value.equals(KeyboardCharacters.STOP) && value.length() == 1)
+        else if (!value.equals(KeyboardCharacters.STOP) && !MathUtil.isNumber(value))
             turn = prevTurn;
         else if (value.equals(KeyboardCharacters.STOP))
         {
             Robot.getArm().setPercent(0);
             return;
-        }
-        else
-        {
-            try
-            {
-                turn = Integer.parseInt(value);
-            }
-            catch (NumberFormatException e)
-            {
-                turn = prevTurn;
-            }
-            
         }
         Robot.getArm().setPosition(turn);
         prevTurn = turn;

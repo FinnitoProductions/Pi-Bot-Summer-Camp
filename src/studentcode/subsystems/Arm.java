@@ -24,7 +24,7 @@ public class Arm extends Subsystem
 
     public void talonInit()
     {
-        setPercent(0);
+        setPosition(RobotMap.ARM_INTAKE_ANGLE);
     }
     
     public static Arm getInstance()

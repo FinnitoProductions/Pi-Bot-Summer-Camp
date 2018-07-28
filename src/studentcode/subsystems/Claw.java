@@ -28,7 +28,7 @@ public class Claw extends Subsystem
     
     public void talonInit()
     {
-        setPercent(0);
+        setPosition(RobotMap.CLAW_OPEN_ANGLE);
     }
     
     public static Claw getInstance()

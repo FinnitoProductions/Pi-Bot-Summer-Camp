@@ -37,7 +37,7 @@ public class DriveWithVelocityKeyboard extends Command
             turn = -RobotMap.MAX_TURN;
         else if (value.equals(KeyboardCharacters.RIGHT))
             turn = RobotMap.MAX_TURN;
-        else if (!value.equals(KeyboardCharacters.STOP))
+        else if (!value.equals(KeyboardCharacters.STOP) && !value.equals(KeyboardCharacters.STOP_DRIVETRAIN))
         {
             // hold previous value if not being told to stop
             speed = prevSpeed;

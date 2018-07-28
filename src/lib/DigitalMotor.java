@@ -52,6 +52,5 @@ public class DigitalMotor implements com.diozero.api.OutputDeviceInterface {
         forward.setState(speed > 0);
         backward.setState(speed < 0);
         enable.setPwm((int) Math.round(Math.abs(1024 * speed)));
-        System.out.println(enable.getPwm());
     }
 }
