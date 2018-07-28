@@ -79,6 +79,7 @@ public class Robot extends TimedRobot
     {
         dt = Drivetrain.getInstance();
         arm = Arm.getInstance();
+        claw = Claw.getInstance();
     }
 
     /**

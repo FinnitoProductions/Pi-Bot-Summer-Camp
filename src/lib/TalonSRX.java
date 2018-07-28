@@ -58,7 +58,7 @@ public class TalonSRX extends PIDController
     public TalonSRX(int port)
     {
         super (-1, 1);
-        motor = new Servo(RobotMap.ARM_SERVO_GPIO);
+        motor = new Servo(port);
         initializeVariables();
     }
     

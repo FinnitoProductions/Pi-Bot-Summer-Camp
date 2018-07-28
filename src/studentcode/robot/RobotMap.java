@@ -24,7 +24,7 @@ public class RobotMap
     public static final int RIGHT_ENCODER_BROWN = 28;
     
     public static final int ARM_SERVO_GPIO = 23; // BCM 23
-    public static final int CLAW_SERVO_GPIO = -1;
+    public static final int CLAW_SERVO_GPIO = 26;
     
     public static final double MAX_SPEED = 0.4;
     public static final double MAX_TURN = 0.4;
@@ -40,7 +40,9 @@ public class RobotMap
         public static final String LEFT = "a";
         public static final String RIGHT = "d";
         public static final String STOP = "o";
-        public static final String SERVO_MAX_UP = "r";
-        public static final String SERVO_MAX_DOWN = "f";
+        public static final String ARM_MAX_UP = "i";
+        public static final String ARM_MAX_DOWN = "k";
+        public static final String CLAW_OPEN = "j";
+        public static final String CLAW_CLOSE = "l";
     }
 }

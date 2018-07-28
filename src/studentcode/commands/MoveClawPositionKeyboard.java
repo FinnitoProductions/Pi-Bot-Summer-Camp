@@ -16,7 +16,7 @@ import studentcode.subsystems.Arm;
  * @author Finn Frankis
  * @version Jul 27, 2018
  */
-public class MoveArmPositionKeyboard extends Command
+public class MoveClawPositionKeyboard extends Command
 {
     private double prevTurn; 
    
@@ -24,15 +24,15 @@ public class MoveArmPositionKeyboard extends Command
     {
         double turn = 0;
         String value = ConsoleReader.getValue();
-        if (value.equals(KeyboardCharacters.ARM_MAX_UP))
-            turn = 150; 
-        else if (value.equals(KeyboardCharacters.ARM_MAX_DOWN))
+        if (value.equals(KeyboardCharacters.CLAW_OPEN))
+            turn = 120; // 150 for arm
+        else if (value.equals(KeyboardCharacters.CLAW_CLOSE))
             turn = 90;
         else if (!value.equals(KeyboardCharacters.STOP) && value.length() == 1)
             turn = prevTurn;
         else if (value.equals(KeyboardCharacters.STOP))
         {
-            Robot.getArm().setArmPercent(0);
+            Robot.getClaw().setArmPercent(0);
             return;
         }
         else
@@ -47,7 +47,7 @@ public class MoveArmPositionKeyboard extends Command
             }
             
         }
-        Robot.getArm().setPosition(turn);
+        Robot.getClaw().setPosition(turn);
         prevTurn = turn;
             
     }
