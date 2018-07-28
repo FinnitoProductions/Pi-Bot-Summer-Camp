@@ -6,6 +6,7 @@ import lib.TalonSRX.ControlMode;
 import studentcode.commands.MoveArmPositionKeyboard;
 import studentcode.commands.MoveClawPosition;
 import studentcode.commands.MoveClawPositionKeyboard;
+import studentcode.robot.Robot;
 import studentcode.robot.RobotMap;
 
 /**
@@ -25,6 +26,10 @@ public class Claw extends Subsystem
         servoClaw = new TalonSRX(RobotMap.CLAW_SERVO_GPIO);
     }
     
+    public void talonInit()
+    {
+        setPercent(0);
+    }
     
     public static Claw getInstance()
     {
@@ -51,7 +56,7 @@ public class Claw extends Subsystem
      * Sets the arm to a given percentage output.
      * @param pOutput the percentage to which the servo should turn [0, 1]
      */
-    public void setArmPercent(double pOutput)
+    public void setPercent(double pOutput)
     {
         servoClaw.set(ControlMode.PercentOutput, pOutput);
     }

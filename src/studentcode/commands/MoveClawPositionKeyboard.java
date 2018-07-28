@@ -28,11 +28,11 @@ public class MoveClawPositionKeyboard extends Command
             turn = 120; 
         else if (value.equals(KeyboardCharacters.CLAW_CLOSE))
             turn = 90;
-        else if (!value.equals(KeyboardCharacters.STOP) && value.length() == 1)
+        else if (!value.equals(KeyboardCharacters.STOP))
             turn = prevTurn;
         else if (value.equals(KeyboardCharacters.STOP))
         {
-            Robot.getClaw().setArmPercent(0);
+            Robot.getClaw().setPercent(0);
             return;
         }
         

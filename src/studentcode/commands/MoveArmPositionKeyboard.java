@@ -32,7 +32,7 @@ public class MoveArmPositionKeyboard extends Command
             turn = prevTurn;
         else if (value.equals(KeyboardCharacters.STOP))
         {
-            Robot.getArm().setArmPercent(0);
+            Robot.getArm().setPercent(0);
             return;
         }
         else

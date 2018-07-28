@@ -41,7 +41,7 @@ public class MoveArmPosition extends Command
     @Override
     public void execute()
     {
-        Robot.getArm().setArmPercent(position);
+        Robot.getArm().setPercent(position);
     }
 
     /**

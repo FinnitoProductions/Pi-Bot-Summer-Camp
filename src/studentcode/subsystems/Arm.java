@@ -22,6 +22,10 @@ public class Arm extends Subsystem
         servoArm = new TalonSRX(RobotMap.ARM_SERVO_GPIO);
     }
 
+    public void talonInit()
+    {
+        servoArm.set(ControlMode.PercentOutput, 0);
+    }
     
     public static Arm getInstance()
     {
