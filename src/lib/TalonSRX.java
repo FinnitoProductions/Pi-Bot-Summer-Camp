@@ -5,7 +5,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.diozero.api.*;
+import com.diozero.internal.provider.wiringpi.WiringPiDeviceFactory;
+import com.diozero.internal.provider.wiringpi.WiringPiPwmOutputDevice;
+import com.diozero.util.RangeUtil;
 
+import lib.Servo.OutputDeviceUnit;
+import lib.Servo.Trim;
 import studentcode.robot.RobotMap;
 
 
@@ -58,7 +63,8 @@ public class TalonSRX extends PIDController
     public TalonSRX(int port)
     {
         super (-1, 1);
-        motor = new Servo(port, 50, 1);
+        motor = new Servo(new WiringPiDeviceFactory(), port, 1, 50, Trim.TOWERPRO_SG90).
+                setOutputDeviceUnit(OutputDeviceUnit.DEGREES);
         initializeVariables();
     }
     
@@ -87,8 +93,8 @@ public class TalonSRX extends PIDController
         {
             if (motor instanceof DigitalMotor)
                 output = getOutput(getSelectedSensorPosition(RobotMap.PID_PRIMARY, RobotMap.TIMEOUT), magnitude);
-            else if (motor instanceof ServoMotor)
-                output = MathUtil.map(magnitude, 0, 1023, 0, 1);
+            else if (motor instanceof Servo)
+                output = magnitude;
         }
         else if (mode == ControlMode.Velocity)
         {
@@ -98,7 +104,6 @@ public class TalonSRX extends PIDController
                 throw new RuntimeException("Velocity control mode only supported for digital motors.");
             
         }
-
         motor.setValue((float) output);
     }
     

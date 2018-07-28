@@ -25,9 +25,9 @@ public class MoveArmPositionKeyboard extends Command
         double turn = 0;
         String value = ConsoleReader.getValue();
         if (value.equals(KeyboardCharacters.SERVO_MAX_UP))
-            turn = 130;
+            turn = 180;
         else if (value.equals(KeyboardCharacters.SERVO_MAX_DOWN))
-            turn = 90;
+            turn = 0;
         else if (!value.equals(KeyboardCharacters.STOP))
             turn = prevTurn;
         Robot.getArm().setPosition(turn);
