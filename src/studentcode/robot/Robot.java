@@ -26,7 +26,7 @@ public class Robot extends TimedRobot
     @Override
     public void autonomousInit()
     {
-        //getDrivetrain().talonInit();
+        getDrivetrain().talonInit();
         getArm().talonInit();
         getClaw().talonInit();
     }

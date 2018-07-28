@@ -22,48 +22,80 @@ public abstract class TimedRobot
     public static void main(String[] args) throws InterruptedException
     {
         new Robot().run();
-        System.exit(0);
     }
     
     public void run() throws InterruptedException
     {
-        System.out.println("Drivers behind the line.");
-        Thread.sleep(1200l);
-        System.out.println("Beginning in");
-        Thread.sleep(1200l);
-        System.out.println("3...");
-        Thread.sleep(1200l);
-        System.out.println("...2...");
-        Thread.sleep(1200l);
-        System.out.println("...1");
-        Thread.sleep(1200l);
-        System.out.println("POWER UP!");
-        robotInit();
-        System.out.println("Autonomous period beginning.");
-        autonomousInit();
-        long startTime = System.currentTimeMillis();
-        while (System.currentTimeMillis() - startTime < autonTime)
+        Thread initThread, introMessageThread;
+        (initThread = new Thread() 
         {
-            autonomousPeriodic();
-            robotPeriodic();
-            Thread.sleep(5l); // pause to allow time for other operations
-        }
-        System.out.println("Teleoperated period beginning.");
-        teleopInit();
-        startTime = System.currentTimeMillis();
-        while (System.currentTimeMillis() - startTime < teleopTime)
-        {
-            teleopPeriodic();
-            robotPeriodic();
-            Thread.sleep(5l); // pause to allow time for other operation
-        }
+            public void run()
+            {
+                robotInit();
+                autonomousInit();
+            }
+        }).start();
         
+        (introMessageThread = new Thread()
+        {
+            public void run()
+            {
+                try
+                {
+                    System.out.println("Drivers behind the line.");
+                    Thread.sleep(900l);
+                    System.out.println("Beginning in");
+                    Thread.sleep(900l);
+                    System.out.println("3...");
+                    Thread.sleep(900l);
+                    System.out.println("...2...");
+                    Thread.sleep(900l);
+                    System.out.println("...1");
+                    Thread.sleep(900l);
+                    System.out.println("POWER UP!");
+                    System.out.println("Autonomous period beginning.");
+                    long startTime = System.currentTimeMillis();
+                    while (System.currentTimeMillis() - startTime < autonTime)
+                    {
+                        autonomousPeriodic();
+                        robotPeriodic();
+                        Thread.sleep(5l); // pause to allow time for other operations
+                    }
+                    System.out.println("Teleoperated period beginning.");
+                    teleopInit();
+                    startTime = System.currentTimeMillis();
+                    while (System.currentTimeMillis() - startTime < teleopTime)
+                    {
+                        teleopPeriodic();
+                        robotPeriodic();
+                        Thread.sleep(5l); // pause to allow time for other operation
+                    }
+                    System.out.println("Match complete.");
+                    System.exit(0);
+                }
+                catch (InterruptedException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
     }
     
+        
     public abstract void autonomousInit();
     public abstract void autonomousPeriodic();
     public abstract void teleopInit();
     public abstract void teleopPeriodic();
     public abstract void robotInit();
     public abstract void robotPeriodic();
+    
+    private class InitRobot extends Thread
+    {
+        public void run()
+        {
+            robotInit();
+            autonomousInit();
+        }
+    }
+    
 }

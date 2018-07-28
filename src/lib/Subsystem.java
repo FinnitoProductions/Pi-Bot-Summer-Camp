@@ -13,7 +13,6 @@ public abstract class Subsystem
     		initDefaultCommand();
     		if(defaultCommand != null) {
     			Scheduler.getInstance().add(defaultCommand);
-    			System.out.println ("default command " + defaultCommand);
     		}
     }
     
