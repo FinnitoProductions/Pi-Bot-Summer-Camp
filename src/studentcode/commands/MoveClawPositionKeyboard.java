@@ -25,9 +25,9 @@ public class MoveClawPositionKeyboard extends Command
         double turn = 0;
         String value = ConsoleReader.getValue();
         if (value.equals(KeyboardCharacters.CLAW_OPEN))
-            turn = 120; 
+            turn = RobotMap.CLAW_OPEN_ANGLE; 
         else if (value.equals(KeyboardCharacters.CLAW_CLOSE))
-            turn = 90;
+            turn = RobotMap.CLAW_CLOSE_ANGLE;
         else if (!value.equals(KeyboardCharacters.STOP))
             turn = prevTurn;
         else if (value.equals(KeyboardCharacters.STOP))

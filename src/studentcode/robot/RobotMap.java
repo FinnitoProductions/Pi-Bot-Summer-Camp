@@ -33,6 +33,11 @@ public class RobotMap
     public static final int PID_AUXILIARY = 1;
     public static final int TIMEOUT = 10;
     
+    public static final int ARM_OUTTAKE_ANGLE = 15;
+    public static final int ARM_INTAKE_ANGLE = 80;
+    
+    public static final int CLAW_CLOSE_ANGLE = 90;
+    public static final int CLAW_OPEN_ANGLE = 120;
     public static class KeyboardCharacters
     {
         public static final String FORWARD = "w";
@@ -40,8 +45,8 @@ public class RobotMap
         public static final String LEFT = "a";
         public static final String RIGHT = "d";
         public static final String STOP = "o";
-        public static final String ARM_MAX_UP = "i";
-        public static final String ARM_MAX_DOWN = "k";
+        public static final String ARM_OUTTAKE = "i";
+        public static final String ARM_INTAKE = "k";
         public static final String CLAW_OPEN = "j";
         public static final String CLAW_CLOSE = "l";
     }

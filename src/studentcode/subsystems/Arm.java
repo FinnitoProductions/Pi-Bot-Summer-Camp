@@ -24,7 +24,7 @@ public class Arm extends Subsystem
 
     public void talonInit()
     {
-        servoArm.set(ControlMode.PercentOutput, 0);
+        setPercent(0);
     }
     
     public static Arm getInstance()
@@ -45,7 +45,7 @@ public class Arm extends Subsystem
     
     /**
      * Sets the arm to a given position.
-     * @param position the position for the servo [0, 1023]
+     * @param position the angle for the servo [0, 180]
      */
     public void setPosition (double position)
     {
@@ -56,7 +56,7 @@ public class Arm extends Subsystem
      * Sets the arm to a given percentage output.
      * @param pOutput the percentage to which the servo should turn [0, 1]
      */
-    public void setArmPercent(double pOutput)
+    public void setPercent(double pOutput)
     {
         servoArm.set(ControlMode.PercentOutput, pOutput);
     }

@@ -24,10 +24,10 @@ public class MoveArmPositionKeyboard extends Command
     {
         double turn = 0;
         String value = ConsoleReader.getValue();
-        if (value.equals(KeyboardCharacters.ARM_MAX_UP))
-            turn = 150; 
-        else if (value.equals(KeyboardCharacters.ARM_MAX_DOWN))
-            turn = 90;
+        if (value.equals(KeyboardCharacters.ARM_OUTTAKE))
+            turn = RobotMap.ARM_OUTTAKE_ANGLE; 
+        else if (value.equals(KeyboardCharacters.ARM_INTAKE))
+            turn = RobotMap.ARM_INTAKE_ANGLE;
         else if (!value.equals(KeyboardCharacters.STOP) && value.length() == 1)
             turn = prevTurn;
         else if (value.equals(KeyboardCharacters.STOP))
