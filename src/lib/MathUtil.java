@@ -35,4 +35,22 @@ public class MathUtil
     {
         return (value - currentMin) * (desiredMax - desiredMin) / (currentMax - currentMin) + desiredMin;
     }
+    
+    /**
+     * Determines whether a given String represents a number.
+     * @param s the String to check
+     * @return true if the String is a number; false otherwise
+     */
+    public static boolean isNumber (String s)
+    {
+        try 
+        {
+            Integer.parseInt(s);
+            return true;
+        }
+        catch (NumberFormatException e)
+        {
+            return false;
+        }
+    }
 }
