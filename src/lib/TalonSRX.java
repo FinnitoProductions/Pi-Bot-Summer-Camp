@@ -88,7 +88,7 @@ public class TalonSRX extends PIDController
             if (motor instanceof DigitalMotor)
                 output = getOutput(getSelectedSensorPosition(RobotMap.PID_PRIMARY, RobotMap.TIMEOUT), magnitude);
             else if (motor instanceof Servo)
-                output = MathUtil.map(magnitude, 0, 1023, 0, 1);
+                output = MathUtil.map(magnitude, 0, 180, 65, 265);
         }
         else if (mode == ControlMode.Velocity)
         {

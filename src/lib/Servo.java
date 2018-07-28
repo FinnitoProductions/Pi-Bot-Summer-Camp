@@ -44,7 +44,6 @@ public class Servo implements OutputDeviceInterface
     @Override
     public void setValue(float value)
     {
-        System.out.println("SERVO OUTPUT : " + (value * 1023));
-        servoPort.setPwm((int) (value * 1023));
+        servoPort.setPwm((int) (value));
     }
 }

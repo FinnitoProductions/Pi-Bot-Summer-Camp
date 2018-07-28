@@ -18,18 +18,35 @@ import studentcode.subsystems.Arm;
  */
 public class MoveArmPositionKeyboard extends Command
 {
-    private double prevTurn;
+    private double prevTurn; 
    
     public void execute()
     {
         double turn = 0;
         String value = ConsoleReader.getValue();
         if (value.equals(KeyboardCharacters.SERVO_MAX_UP))
-            turn = 1020;
+            turn = 120; // 150 for arm
         else if (value.equals(KeyboardCharacters.SERVO_MAX_DOWN))
             turn = 90;
-        else if (!value.equals(KeyboardCharacters.STOP))
+        else if (!value.equals(KeyboardCharacters.STOP) && value.length() == 1)
             turn = prevTurn;
+        else if (value.equals(KeyboardCharacters.STOP))
+        {
+            Robot.getArm().setArmPercent(0);
+            return;
+        }
+        else
+        {
+            try
+            {
+                turn = Integer.parseInt(value);
+            }
+            catch (NumberFormatException e)
+            {
+                turn = prevTurn;
+            }
+            
+        }
         Robot.getArm().setPosition(turn);
         prevTurn = turn;
             
