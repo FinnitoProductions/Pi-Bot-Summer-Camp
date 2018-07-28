@@ -58,7 +58,7 @@ public class TalonSRX extends PIDController
     public TalonSRX(int port)
     {
         super (-1, 1);
-        motor = new Servo(port, 50, 1);
+        motor = new Servo(RobotMap.ARM_SERVO_GPIO);
         initializeVariables();
     }
     
@@ -87,7 +87,7 @@ public class TalonSRX extends PIDController
         {
             if (motor instanceof DigitalMotor)
                 output = getOutput(getSelectedSensorPosition(RobotMap.PID_PRIMARY, RobotMap.TIMEOUT), magnitude);
-            else if (motor instanceof ServoMotor)
+            else if (motor instanceof Servo)
                 output = MathUtil.map(magnitude, 0, 1023, 0, 1);
         }
         else if (mode == ControlMode.Velocity)
@@ -111,7 +111,7 @@ public class TalonSRX extends PIDController
      */
     public void set(ControlMode mode, double magnitude, DemandType dt, double demandValue)
     {
-        if (!(motor instanceof ServoMotor))
+        if (!(motor instanceof Servo))
         {
             double output = 0;
             if (mode == ControlMode.PercentOutput)

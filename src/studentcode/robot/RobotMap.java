@@ -23,7 +23,7 @@ public class RobotMap
     public static final int RIGHT_ENCODER_ORANGE = 27;
     public static final int RIGHT_ENCODER_BROWN = 28;
     
-    public static final int ARM_SERVO_GPIO = 5; // BCM 23
+    public static final int ARM_SERVO_GPIO = 23; // BCM 23
     public static final int CLAW_SERVO_GPIO = -1;
     
     public static final double MAX_SPEED = 0.4;
