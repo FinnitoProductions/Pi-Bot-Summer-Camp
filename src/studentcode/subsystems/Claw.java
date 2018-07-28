@@ -25,6 +25,7 @@ public class Claw extends Subsystem
         servoClaw = new TalonSRX(RobotMap.CLAW_SERVO_GPIO);
     }
     
+    
     public static Claw getInstance()
     {
         if (claw == null)

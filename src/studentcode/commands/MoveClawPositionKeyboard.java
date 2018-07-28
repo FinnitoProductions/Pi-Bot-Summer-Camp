@@ -25,7 +25,7 @@ public class MoveClawPositionKeyboard extends Command
         double turn = 0;
         String value = ConsoleReader.getValue();
         if (value.equals(KeyboardCharacters.CLAW_OPEN))
-            turn = 120; // 150 for arm
+            turn = 120; 
         else if (value.equals(KeyboardCharacters.CLAW_CLOSE))
             turn = 90;
         else if (!value.equals(KeyboardCharacters.STOP) && value.length() == 1)
@@ -35,18 +35,7 @@ public class MoveClawPositionKeyboard extends Command
             Robot.getClaw().setArmPercent(0);
             return;
         }
-        else
-        {
-            try
-            {
-                turn = Integer.parseInt(value);
-            }
-            catch (NumberFormatException e)
-            {
-                turn = prevTurn;
-            }
-            
-        }
+        
         Robot.getClaw().setPosition(turn);
         prevTurn = turn;
             

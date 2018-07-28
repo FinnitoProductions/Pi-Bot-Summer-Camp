@@ -30,7 +30,7 @@ public class DigitalMotor implements com.diozero.api.OutputDeviceInterface {
 		GpioController gpio = GpioFactory.getInstance();
 		this.forward = gpio.provisionDigitalOutputPin(RaspiPin.getPinByAddress(forward));
 		this.backward = gpio.provisionDigitalOutputPin(RaspiPin.getPinByAddress(backward));
-		this.enable = gpio.provisionPwmOutputPin(RaspiPin.getPinByAddress(enable));
+		this.enable = gpio.provisionSoftPwmOutputPin(RaspiPin.getPinByAddress(enable));
 		
 		Gpio.pwmSetMode(Gpio.PWM_MODE_MS);
 		Gpio.pwmSetRange(1024);
@@ -52,5 +52,6 @@ public class DigitalMotor implements com.diozero.api.OutputDeviceInterface {
         forward.setState(speed > 0);
         backward.setState(speed < 0);
         enable.setPwm((int) Math.round(Math.abs(1024 * speed)));
+        System.out.println(enable.getPwm());
     }
 }
