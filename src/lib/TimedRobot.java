@@ -27,14 +27,6 @@ public abstract class TimedRobot
     public void run() throws InterruptedException
     {
         Thread initThread, introMessageThread;
-        (initThread = new Thread() 
-        {
-            public void run()
-            {
-                robotInit();
-                autonomousInit();
-            }
-        }).start();
         
         (introMessageThread = new Thread()
         {
@@ -43,16 +35,17 @@ public abstract class TimedRobot
                 try
                 {
                     System.out.println("Drivers behind the line.");
-                    Thread.sleep(900l);
+                    Thread.sleep(1000l);
                     System.out.println("Beginning in");
-                    Thread.sleep(900l);
+                    Thread.sleep(1000l);
                     System.out.println("3...");
-                    Thread.sleep(900l);
+                    Thread.sleep(1000l);
                     System.out.println("...2...");
-                    Thread.sleep(900l);
+                    Thread.sleep(1000l);
                     System.out.println("...1");
-                    Thread.sleep(900l);
+                    Thread.sleep(1000l);
                     System.out.println("POWER UP!");
+                    wait();
                     System.out.println("Autonomous period beginning.");
                     long startTime = System.currentTimeMillis();
                     while (System.currentTimeMillis() - startTime < autonTime)
@@ -77,6 +70,16 @@ public abstract class TimedRobot
                 {
                     e.printStackTrace();
                 }
+            }
+        }).start();
+        
+        (initThread = new Thread() 
+        {
+            public void run()
+            {
+                robotInit();
+                autonomousInit();
+                introMessageThread.notify();
             }
         }).start();
     }
