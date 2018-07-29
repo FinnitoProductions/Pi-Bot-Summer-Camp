@@ -36,6 +36,7 @@ public class Drivetrain extends Subsystem
     
     public void talonInit()
     {
+        System.out.println("DT TALON INIT");
         leftTalon.setupEncoder(RobotMap.LEFT_ENCODER_ORANGE, RobotMap.LEFT_ENCODER_BROWN);
         rightTalon.setupEncoder(RobotMap.RIGHT_ENCODER_ORANGE, RobotMap.RIGHT_ENCODER_BROWN);
         

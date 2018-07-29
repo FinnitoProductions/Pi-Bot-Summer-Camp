@@ -15,6 +15,7 @@ public class ConsoleReader
 {
     private static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     private static String prevValue = "";
+    private static int numExecutesWithoutChange;
     
     /**
      * Returns the value currently being sent to the console.
@@ -28,12 +29,20 @@ public class ConsoleReader
             {
                 String currentLine = br.readLine();
                 prevValue = currentLine != null ? currentLine : "";
+                numExecutesWithoutChange = currentLine.equals("") ? numExecutesWithoutChange : 0;
             }
+            else
+                numExecutesWithoutChange++;
         }
         catch (IOException e)
         {
             e.printStackTrace();
         }
         return prevValue;
+    }
+    
+    public static int getNumExecutesWithoutChange ()
+    {
+        return numExecutesWithoutChange;
     }
 }

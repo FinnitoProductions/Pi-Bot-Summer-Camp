@@ -39,6 +39,14 @@ public class Robot extends TimedRobot
     {
         // TODO Auto-generated method stub
         Scheduler.getInstance().run();
+        if (Robot.dt.getLeftTalon().getSelectedSensorVelocity(RobotMap.PID_PRIMARY, 
+                RobotMap.TIMEOUT) > 0)
+            System.out.println("LEFT ENCODER VAL: " + Robot.dt.getLeftTalon().getSelectedSensorPosition
+                    (RobotMap.PID_PRIMARY, RobotMap.TIMEOUT));
+        if (Robot.dt.getRightTalon().getSelectedSensorVelocity(RobotMap.PID_PRIMARY, 
+                RobotMap.TIMEOUT) > 0)
+            System.out.println("RIGHT ENCODER VAL: " + Robot.dt.getRightTalon().getSelectedSensorPosition
+                    (RobotMap.PID_PRIMARY, RobotMap.TIMEOUT));
     }
 
     /**
@@ -56,6 +64,15 @@ public class Robot extends TimedRobot
     public void teleopPeriodic()
     {
         Scheduler.getInstance().run();
+        
+        /*if (Robot.dt.getLeftTalon().getSelectedSensorVelocity(RobotMap.PID_PRIMARY, 
+                RobotMap.TIMEOUT) > 0)
+            System.out.println("LEFT ENCODER VAL: " + Robot.dt.getLeftTalon().getSelectedSensorPosition
+                    (RobotMap.PID_PRIMARY, RobotMap.TIMEOUT));*/
+        if (Robot.dt.getRightTalon().getSelectedSensorVelocity(RobotMap.PID_PRIMARY, 
+                RobotMap.TIMEOUT) > 0)
+            System.out.println("RIGHT ENCODER VAL: " + Robot.dt.getRightTalon().getSelectedSensorPosition
+                    (RobotMap.PID_PRIMARY, RobotMap.TIMEOUT));
     }
     
     public static Drivetrain getDrivetrain()
