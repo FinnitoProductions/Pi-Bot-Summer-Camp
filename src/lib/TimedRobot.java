@@ -11,6 +11,7 @@ public abstract class TimedRobot
 {
     private int autonTime;
     private int teleopTime;
+    private boolean initOver;
     
     public TimedRobot(int autonTimeMs, int teleopTimeMs)
     {
@@ -27,7 +28,7 @@ public abstract class TimedRobot
     public void run() throws InterruptedException
     {
         Thread initThread, introMessageThread;
-        
+
         (introMessageThread = new Thread()
         {
             public void run()
@@ -45,7 +46,7 @@ public abstract class TimedRobot
                     System.out.println("...1");
                     Thread.sleep(1000l);
                     System.out.println("POWER UP!");
-                    wait();
+                    while (!initOver);
                     System.out.println("Autonomous period beginning.");
                     long startTime = System.currentTimeMillis();
                     while (System.currentTimeMillis() - startTime < autonTime)
@@ -79,9 +80,10 @@ public abstract class TimedRobot
             {
                 robotInit();
                 autonomousInit();
-                introMessageThread.notify();
+                initOver = true;
             }
         }).start();
+        
     }
     
         
