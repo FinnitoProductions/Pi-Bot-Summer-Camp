@@ -26,8 +26,8 @@ public class RobotMap
     public static final int ARM_SERVO_GPIO = 23; // BCM 13
     public static final int CLAW_SERVO_GPIO = 26; // BCM 12
     
-    public static final double MAX_SPEED = 0.08;
-    public static final double MAX_TURN = 0.07;
+    public static final double MAX_SPEED = 1;
+    public static final double MAX_TURN = 0.15;
     
     public static final int PID_PRIMARY = 0;
     public static final int PID_AUXILIARY = 1;
@@ -36,8 +36,8 @@ public class RobotMap
     public static final int ARM_OUTTAKE_ANGLE = 15;
     public static final int ARM_INTAKE_ANGLE = 75;
     
-    public static final int CLAW_CLOSE_ANGLE = 150;
-    public static final int CLAW_OPEN_ANGLE = 90;
+    public static final int CLAW_CLOSE_ANGLE = 37;
+    public static final int CLAW_OPEN_ANGLE = 10;
     public static class KeyboardCharacters
     {
         public static final String FORWARD = "w";
