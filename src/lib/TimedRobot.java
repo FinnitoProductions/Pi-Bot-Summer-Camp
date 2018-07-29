@@ -90,15 +90,5 @@ public abstract class TimedRobot
     public abstract void teleopInit();
     public abstract void teleopPeriodic();
     public abstract void robotInit();
-    public abstract void robotPeriodic();
-    
-    private class InitRobot extends Thread
-    {
-        public void run()
-        {
-            robotInit();
-            autonomousInit();
-        }
-    }
-    
+    public abstract void robotPeriodic();    
 }
