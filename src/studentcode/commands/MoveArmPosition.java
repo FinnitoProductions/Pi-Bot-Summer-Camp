@@ -1,9 +1,7 @@
 package studentcode.commands;
 
 import lib.Command;
-import lib.TalonSRX.ControlMode;
 import studentcode.robot.Robot;
-import studentcode.subsystems.Arm;
 
 /**
  * 

@@ -1,16 +1,11 @@
 package studentcode.commands;
 
-import java.time.ZoneId;
-import java.util.Scanner;
-
 import lib.Command;
 import lib.ConsoleReader;
 import lib.MathUtil;
-import lib.TalonSRX.ControlMode;
 import studentcode.robot.Robot;
 import studentcode.robot.RobotMap;
 import studentcode.robot.RobotMap.KeyboardCharacters;
-import studentcode.subsystems.Arm;
 
 /**
  * 

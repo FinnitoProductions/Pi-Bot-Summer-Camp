@@ -1,7 +1,5 @@
 package studentcode.commands;
 
-import java.util.Scanner;
-
 import lib.Command;
 import lib.ConsoleReader;
 import studentcode.robot.Robot;

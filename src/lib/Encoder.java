@@ -10,6 +10,7 @@ import com.pi4j.io.gpio.RaspiPin;
 import com.pi4j.io.gpio.event.GpioPinDigitalStateChangeEvent;
 import com.pi4j.io.gpio.event.GpioPinListenerDigital;
 
+
 /**
  * Represents a magnetic encoder.
  * @author Finn Frankis 
@@ -27,7 +28,7 @@ public class Encoder extends FeedbackSensor
     public Encoder (int orangePort, int brownPort)
     {        
         GpioController currentController = GpioFactory.getInstance();
-        
+
         orangeInput = currentController.provisionDigitalInputPin(RaspiPin.getPinByAddress(orangePort), PinPullResistance.PULL_DOWN);
         brownInput = currentController.provisionDigitalInputPin(RaspiPin.getPinByAddress(brownPort), PinPullResistance.PULL_DOWN);
         

@@ -3,10 +3,7 @@ package studentcode.subsystems;
 import lib.Subsystem;
 import lib.TalonSRX;
 import lib.TalonSRX.ControlMode;
-import studentcode.commands.MoveArmPositionKeyboard;
-import studentcode.commands.MoveClawPosition;
 import studentcode.commands.MoveClawPositionKeyboard;
-import studentcode.robot.Robot;
 import studentcode.robot.RobotMap;
 
 /**
@@ -26,6 +23,9 @@ public class Claw extends Subsystem
         servoClaw = new TalonSRX(RobotMap.CLAW_SERVO_GPIO);
     }
     
+    /**
+     * Initializes the Talon on the claw.
+     */
     public void talonInit()
     {
         setPosition(RobotMap.CLAW_OPEN_ANGLE);

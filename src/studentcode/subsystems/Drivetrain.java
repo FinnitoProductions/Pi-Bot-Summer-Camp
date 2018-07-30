@@ -1,7 +1,6 @@
 
 package studentcode.subsystems;
 
-import lib.InstantCommand;
 import lib.Subsystem;
 import lib.TalonSRX;
 import lib.TalonSRX.ControlMode;

@@ -18,6 +18,7 @@ public class TalonSRX extends PIDController
 {
     private FeedbackSensor[] selectedSensors;
     private Map<FeedbackDevice, FeedbackSensor> sensors;
+
     
     /**
      * The mode which will be run on the Talon when the set() method is applied.
@@ -120,6 +121,7 @@ public class TalonSRX extends PIDController
     public void set(ControlMode mode, double magnitude)
     {
         double output = 0;
+        
         if (mode == ControlMode.PercentOutput)
         {
             output = magnitude;
