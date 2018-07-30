@@ -23,7 +23,6 @@ public class DriveToPosition extends Command
     @Override
     protected boolean isFinished()
     {
-        // TODO Auto-generated method stub
         return false;
     }
 
@@ -43,8 +42,6 @@ public class DriveToPosition extends Command
     @Override
     protected void execute()
     {
-        // TODO Auto-generated method stub
-        
     }
 
     /**
@@ -53,8 +50,6 @@ public class DriveToPosition extends Command
     @Override
     protected void end()
     {
-        // TODO Auto-generated method stub
-        
     }
 
 }

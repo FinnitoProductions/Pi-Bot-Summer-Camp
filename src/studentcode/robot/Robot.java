@@ -40,7 +40,6 @@ public class Robot extends TimedRobot
     @Override
     public void autonomousPeriodic()
     {
-        // TODO Auto-generated method stub
         Scheduler.getInstance().run();
         if (Robot.dt.getLeftTalon().getSelectedSensorVelocity(RobotMap.PID_PRIMARY, 
                 RobotMap.TIMEOUT) > 0)

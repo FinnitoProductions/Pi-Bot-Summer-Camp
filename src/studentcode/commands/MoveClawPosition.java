@@ -50,7 +50,5 @@ public class MoveClawPosition extends Command
     @Override
     public void end()
     {
-        // TODO Auto-generated method stub
-        
     }
 }

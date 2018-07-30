@@ -55,8 +55,6 @@ public class MoveArmPositionKeyboard extends Command
     @Override
     protected void initialize()
     {
-        // TODO Auto-generated method stub
-        
     }
 
     /**
@@ -65,7 +63,5 @@ public class MoveArmPositionKeyboard extends Command
     @Override
     protected void end()
     {
-        // TODO Auto-generated method stub
-        
     }
 }

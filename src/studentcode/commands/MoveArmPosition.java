@@ -48,8 +48,6 @@ public class MoveArmPosition extends Command
     @Override
     public void end()
     {
-        // TODO Auto-generated method stub
-        
     }
     
 }

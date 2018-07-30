@@ -76,7 +76,7 @@ public class MoveClawPositionKeyboard extends Command
     @Override
     protected void initialize()
     {
-        // TODO Auto-generated method stub
+        
         
     }
 
@@ -86,7 +86,7 @@ public class MoveClawPositionKeyboard extends Command
     @Override
     protected void end()
     {
-        // TODO Auto-generated method stub
+        
         
     }
 }
