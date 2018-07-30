@@ -19,18 +19,59 @@ public class TalonSRX extends PIDController
     private FeedbackSensor[] selectedSensors;
     private Map<FeedbackDevice, FeedbackSensor> sensors;
     
+    /**
+     * The mode which will be run on the Talon when the set() method is applied.
+     * @author Finn Frankis
+     * @version Jul 8, 2018
+     */
     public enum ControlMode
     {
-        PercentOutput, Position, Velocity, Disabled;
+        /**
+         * Specifies that the Talon should drive based on a percent output [0,1].
+         */
+        PercentOutput, 
+        
+        /**
+         * Specifies that the robot should closed loop to a given position 
+         * as read by the primary sensor.
+         */
+        Position, 
+        
+        /**
+         * Specifies that the robot should closed loop to a given velocity
+         * as read by the primary sensor.
+         */
+        Velocity, 
+        
+        /**
+         * Specifies that the Talon should be disabled.
+         */
+        Disabled;
     }
     
+    /**
+     * Represents the possible demand types used in the .set() method.
+     * @author Finn Frankis
+     * @version Jul 30, 2018
+     */
     public enum DemandType
     {
+        /**
+         * Specifies an arbitrary feed forward to always be added to the motor output.
+         */
         FeedForward;
     }
     
+    /**
+     * Represents the possible sensor types.
+     * @author Finn Frankis
+     * @version Jul 30, 2018
+     */
     public enum FeedbackDevice
     {
+        /**
+         * Refers to a magnetic encoder as a sensor type.
+         */
         MagneticEncoder;
     }
     
@@ -133,6 +174,11 @@ public class TalonSRX extends PIDController
             throw new RuntimeException("Demand types not supported for Servo motors.");
     }
     
+    /**
+     * Sets up the Encoder by specifying its GPIO location
+     * @param orangePin the orange pin for the encoder
+     * @param brownPin the brown pin for the encoder
+     */
     public void setupEncoder (int orangePin, int brownPin)
     {
         sensors.put(FeedbackDevice.MagneticEncoder, new Encoder(orangePin, brownPin));
@@ -155,8 +201,9 @@ public class TalonSRX extends PIDController
     /**
      * Gets the sensor position at the given loop index.
      * @param loopIndex the PID loop index (primary/auxiliary) [0, 1]
+     * @param timeout the time after which the attempts to send the command cease (if it continually fails
+     * to send)
      * @return the current sensor position
-     * @throws InterruptedException 
      */
     public double getSelectedSensorPosition (int loopIndex, int timeout)
     {
@@ -170,6 +217,8 @@ public class TalonSRX extends PIDController
     /**
      * Gets the sensor velocity at the given loop index.
      * @param loopIndex the PID loop index (primary/auxiliary) [0,1]
+     * @param timeout the time after which the attempts to send the command cease (if it continually fails
+     * to send)
      * @return the sensor velocity
      */
     public double getSelectedSensorVelocity (int loopIndex, int timeout)
@@ -181,6 +230,13 @@ public class TalonSRX extends PIDController
         return selectedSensors[loopIndex].getVelocity();
     }
     
+    /**
+     * Sets the sensor position to a given value.
+     * @param sensorValue the value to which the sensor should be set
+     * @param loopIndex the PID loop index of the sensor to be set [0,1]
+     * @param timeout the time after which the attempts to send the command cease (if it continually fails
+     * to send)
+     */
     public void setSelectedSensorPosition (double sensorValue, int loopIndex, int timeout)
     {
         selectedSensors[loopIndex].setPosition(sensorValue);
