@@ -27,7 +27,11 @@ public class PIDController
     private double minOutput;
     private double maxOutput;
     
-    
+    /**
+     * Constructs a new PIDController.
+     * @param minOutput the minimum possible output for the controller to return
+     * @param maxOutput the maximum possible output for the controller to return
+     */
     public PIDController (double minOutput, double maxOutput)
     {
         kF = new HashMap<Integer, Double>();
@@ -41,31 +45,71 @@ public class PIDController
         this.maxOutput = maxOutput;
     }
     
+    /**
+     * Configures the kF value at a given PID slot.
+     * @param kF the value to be stored
+     * @param slot the PID slot at which the constants will be stored [0,3]
+     * @param timeout the time after which the attempts to send the command cease (if it continually fails
+     * to send)
+     */
     public void config_kF(double kF, int slot, int timeout)
     {
         this.kF.put(slot, kF);
     }
     
+    /**
+     * Configures the kP value at a given PID slot.
+     * @param kP the value to be stored
+     * @param slot the PID slot at which the constants will be stored [0,3]
+     * @param timeout the time after which the attempts to send the command cease (if it continually fails
+     * to send)
+     */
     public void config_kP(double kP, int slot, int timeout)
     {
         this.kP.put(slot, kP);
     }
     
+    /**
+     * Configures the kI value at a given PID slot.
+     * @param kI the value to be stored
+     * @param slot the PID slot at which the constants will be stored [0,3]
+     * @param timeout the time after which the attempts to send the command cease (if it continually fails
+     * to send)
+     */
     public void config_kI(double kI, int slot, int timeout)
     {
         this.kI.put(slot, kI);
     }
     
+    /**
+     * Configures the kD value at a given PID slot.
+     * @param kD the value to be stored
+     * @param slot the PID slot at which the constants will be stored [0,3]
+     * @param timeout the time after which the attempts to send the command cease (if it continually fails
+     * to send)
+     */
     public void config_kD(double kD, int slot, int timeout)
     {
         this.kD.put(slot, kD);
     }
     
+    /**
+     * Configures the I-Zone value at a given PID slot.
+     * @param iZone the value to be stored
+     * @param slot the PID slot at which the constants will be stored [0,3]
+     * @param timeout the time after which the attempts to send the command cease (if it continually fails
+     * to send)
+     */
     public void config_IntegralZone(double iZone, int slot, int timeout)
     {
         this.iZone.put(slot, iZone);
     }
     
+    /**
+     * Selects the PID constants to use in either the primary or auxiliary PID loop.
+     * @param slotIndex the PID slot index [0,3]
+     * @param loopIndex the PID loop index (primary/auxiliary) [0,1]
+     */
     public void selectProfileSlot(int slotIndex, int loopIndex)
     {
         if (loopIndex == 0)
@@ -105,6 +149,11 @@ public class PIDController
         return MathUtil.restrictValue(output_F + output_P + output_I + output_D, minOutput, maxOutput);
     }
     
+    /**
+     * Gets the closed loop error at a given loop index.
+     * @param loopIndex the PID loop index to check (primary/auxiliary) [0,1]
+     * @return closed loop error
+     */
     public double getClosedLoopError (double loopIndex)
     {
         return lastError;

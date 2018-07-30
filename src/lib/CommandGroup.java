@@ -3,8 +3,8 @@ package lib;
 import java.util.ArrayList;
 
 /**
+ * Represents a group of commands.
  * @author joel
- *
  */
 public abstract class CommandGroup extends Command {
 	
@@ -12,11 +12,18 @@ public abstract class CommandGroup extends Command {
 	
 	private int index;
 	
+	/*
+	 * Constructs a new CommandGroup.
+	 */
 	public CommandGroup() {
 		commands = new ArrayList<ArrayList<Command>>();
 		commands.add(new ArrayList<Command>());
 	}
 	
+	/**
+	 * Adds a sequential command to the group (occurs in sequence with all other sequential commands).
+	 * @param c the command to be added
+	 */
 	protected void addSequential(Command c) {
 		if(isRunning())
 			throw new IllegalStateException("Cannot add commands while running");
@@ -24,6 +31,10 @@ public abstract class CommandGroup extends Command {
 		commands.add(new ArrayList<Command>());
 	}
 	
+	/**
+	 * Adds a parallel command to the group (occurs in parallel with all other commands).
+	 * @param c the command to be added
+	 */
 	protected void addParallel(Command c) {
 		if(isRunning())
 			throw new IllegalStateException("Cannot add commands while running");

@@ -3,7 +3,7 @@ package lib;
 import studentcode.robot.Robot;
 
 /**
- * 
+ * Represents a robot which is controlled by timed segments.
  * @author Finn Frankis
  * @version Jul 8, 2018
  */
@@ -13,6 +13,11 @@ public abstract class TimedRobot
     private int teleopTime;
     private boolean initOver;
     
+    /**
+     * Constructs a new TimedRobot.
+     * @param autonTimeMs the time (in ms) for which auton should last
+     * @param teleopTimeMs the time (in ms) for which teleop should last
+     */
     public TimedRobot(int autonTimeMs, int teleopTimeMs)
     {
         this.autonTime = autonTimeMs;
@@ -25,11 +30,15 @@ public abstract class TimedRobot
         new Robot().run();
     }
     
+    /**
+     * To be run when the robot is enabled.
+     * @throws InterruptedException if the Thread.sleep() calls are interrupted
+     */
     public void run() throws InterruptedException
     {
-        Thread initThread, introMessageThread;
+        Thread initThread, periodicThread;
 
-        (introMessageThread = new Thread()
+        (periodicThread = new Thread()
         {
             public void run()
             {
@@ -86,11 +95,33 @@ public abstract class TimedRobot
         
     }
     
-        
+    /**
+     * Called when autonomous begins.
+     */
     public abstract void autonomousInit();
+    
+    /**
+     * Called periodically during the autonomous period.
+     */
     public abstract void autonomousPeriodic();
+    
+    /**
+     * Called when teleop begins.
+     */
     public abstract void teleopInit();
+    
+    /**
+     * Called periodically during the teleoperated period.
+     */
     public abstract void teleopPeriodic();
+    
+    /**
+     * Called when the code is first deployed to the robot.
+     */
     public abstract void robotInit();
+    
+    /**
+     * Called periodically while the robot is powered on with code deployed.
+     */
     public abstract void robotPeriodic();    
 }

@@ -15,13 +15,16 @@ public class Robot extends TimedRobot
     private static Arm arm;
     private static Claw claw;
     
+    /**
+     * Constructs a new Robot.
+     */
     public Robot()
     {
         super(RobotMap.AUTON_TIME_MS, RobotMap.TELEOP_TIME_MS);
     }
 
     /**
-    * 
+    * Called once when the autonomous period begins.
     */
     @Override
     public void autonomousInit()
@@ -32,7 +35,7 @@ public class Robot extends TimedRobot
     }
 
     /**
-    * 
+    * Called periodically during the autonomous period.
     */
     @Override
     public void autonomousPeriodic()
@@ -75,23 +78,35 @@ public class Robot extends TimedRobot
                     (RobotMap.PID_PRIMARY, RobotMap.TIMEOUT));
     }
     
+    /**
+     * Gets the Drivetrain.
+     * @return the instance of Drivetrain
+     */
     public static Drivetrain getDrivetrain()
     {
         return dt;
     }
     
+    /**
+     * Gets the Arm.
+     * @return the instance of Arm
+     */
     public static Arm getArm()
     {
         return arm;
     }
 
+    /**
+     * Gets the Arm.
+     * @return the instance of Claw
+     */
     public static Claw getClaw()
     {
         return claw;
     }
 
     /**
-    * 
+    * Called once when the robot initializes.
     */
     @Override
     public void robotInit()
@@ -102,7 +117,7 @@ public class Robot extends TimedRobot
     }
 
     /**
-    * 
+    * Called periodically throughout the duration of the robot's being enabled.
     */
     @Override
     public void robotPeriodic()

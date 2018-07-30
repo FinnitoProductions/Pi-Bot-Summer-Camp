@@ -12,14 +12,18 @@ public abstract class FeedbackSensor
     private double currentPosition;
    
     /**
-     * 
-     * @return
+     * Gets the current position.
+     * @return the current sensor position
      */
     public double getPosition()
     {
         return currentPosition;
     }
     
+    /**
+     * Gets the current velocity.
+     * @return the current sensor velocity
+     */
     public double getVelocity()
     {
         double currentPosition = getPosition(), currentTime = System.currentTimeMillis();
