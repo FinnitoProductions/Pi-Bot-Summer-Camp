@@ -9,6 +9,8 @@ import lib.TalonSRX.FeedbackDevice;
 import studentcode.commands.*;
 import studentcode.robot.RobotMap;
 
+import java.util.function.Consumer;
+
 /**
  * Represents the drivetrain on the robot.
  * @author Finn Frankis
@@ -19,7 +21,8 @@ public class Drivetrain extends Subsystem
     private static Drivetrain dt;
     private TalonSRX leftTalon;
     private TalonSRX rightTalon;
-    
+    private boolean closedLoopErrorWithin;
+
     /**
      * Constructs a new Drivetrain.
      */
@@ -89,5 +92,45 @@ public class Drivetrain extends Subsystem
     public TalonSRX getRightTalon()
     {
         return rightTalon;
+    }
+
+    /**
+     * Applies a given method to both Talons on the Drivetrain. 
+
+     * @param talonConsumer the consumer which represents the method to apply to both talons;
+     * correct syntax would be: set ((talon) -> {talon.[apply method here];})
+     */
+    public void applyToBoth (Consumer<TalonSRX> talonConsumer)
+    {
+        talonConsumer.accept(getLeftTalon());
+        talonConsumer.accept(getRightTalon());
+    }
+
+    /**
+     * Prints the sensor positions of both Talon sensors in a given PID loop.
+     * 
+     * @param pidLoop the PID loop index to be checked [0, 1]
+     */
+    public void printBothSensorPositions (int pidLoop)
+    {
+        applyToBoth((talon) -> {
+            if (talon.getSelectedSensorVelocity(pidLoop, RobotMap.TIMEOUT) > 0)
+                System.out.println(talon.getSelectedSensorPosition(pidLoop, RobotMap.TIMEOUT)); 
+        });
+    }
+
+    /**
+     * Determines whether the closed loop error of both Talons are within a given tolerance.
+     * 
+     * @param pidLoop the PID loop index to be checked [0, 1]
+     * @param tolerance the tolerance
+     */
+    public boolean getClosedLoopErrorWithin(int pidLoop, int tolerance)
+    {
+        closedLoopErrorWithin = true;
+        applyToBoth((talon) -> {closedLoopErrorWithin &= 
+            talon.getSelectedSensorPosition(pidLoop, RobotMap.TIMEOUT) 
+            < tolerance;});
+        return closedLoopErrorWithin;
     }
 }

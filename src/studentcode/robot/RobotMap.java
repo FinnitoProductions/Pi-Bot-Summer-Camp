@@ -38,6 +38,7 @@ public class RobotMap
     
     public static final int CLAW_CLOSE_ANGLE = 37;
     public static final int CLAW_OPEN_ANGLE = 10;
+	public static final int POS_ALLOWABLE_ERROR = 10;
     public static class KeyboardCharacters
     {
         public static final String FORWARD = "w";
