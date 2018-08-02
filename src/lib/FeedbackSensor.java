@@ -29,7 +29,7 @@ public abstract class FeedbackSensor
         double currentPosition = getPosition(), currentTime = System.currentTimeMillis();
         Double deltaT = currentTime - previousTime;
         
-        if (previousTime == -1 || deltaT.equals(0))
+        if (previousTime == -1 || deltaT.equals(0d))
             return 0;
         
         double velocity = (currentPosition - previousPosition) / (currentTime - previousTime);
