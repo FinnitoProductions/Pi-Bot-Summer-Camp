@@ -3,6 +3,8 @@ package lib;
 import java.util.HashMap;
 import java.util.Map;
 
+import studentcode.robot.RobotMap;
+
 /**
  * Represents a PID controller.
  * @author Finn Frankis
@@ -38,11 +40,23 @@ public class PIDController
         kP = new HashMap<Integer, Double>();
         kI = new HashMap<Integer, Double>();
         kD = new HashMap<Integer, Double>();
+        iZone = new HashMap<Integer, Double>();
+        setValuesToZero (kF, kP, kI, kD, iZone);
+        
         errorSum = 0;
         lastError = 0;
         hasRun = false;
         this.minOutput = minOutput;
         this.maxOutput = maxOutput;
+    }
+    
+    public void setValuesToZero (Map<Integer, Double>... maps)
+    {
+        for (Map<Integer, Double> map : maps)
+        {
+            for (int i = 0; i < 4; i++)
+                map.put(i, 0d);
+        }
     }
     
     /**
