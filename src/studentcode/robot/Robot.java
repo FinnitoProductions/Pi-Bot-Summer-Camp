@@ -21,6 +21,7 @@ public class Robot extends TimedRobot
     public Robot()
     {
         super(RobotMap.AUTON_TIME_MS, RobotMap.TELEOP_TIME_MS);
+
     }
 
     /**
@@ -41,7 +42,7 @@ public class Robot extends TimedRobot
     public void autonomousPeriodic()
     {
         Scheduler.getInstance().run();
-        Robot.getDrivetrain().printBothSensorPositions(RobotMap.PID_PRIMARY);
+        //Robot.getDrivetrain().printBothSensorPositions(RobotMap.PID_PRIMARY);
     }
 
     /**
@@ -59,7 +60,7 @@ public class Robot extends TimedRobot
     public void teleopPeriodic()
     {
         Scheduler.getInstance().run();
-        Robot.getDrivetrain().printBothSensorPositions(RobotMap.PID_PRIMARY);
+        //Robot.getDrivetrain().printBothSensorPositions(RobotMap.PID_PRIMARY);
     }
     
     /**

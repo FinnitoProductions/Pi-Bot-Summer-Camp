@@ -18,6 +18,7 @@ public class TalonSRX extends PIDController
 {
     private FeedbackSensor[] selectedSensors;
     private Map<FeedbackDevice, FeedbackSensor> sensors;
+    private double prevOutput;
 
     
     /**
@@ -141,7 +142,7 @@ public class TalonSRX extends PIDController
                 throw new RuntimeException("Velocity control mode only supported for digital motors.");
             
         }
-
+        prevOutput = output;
         motor.setValue((float) output);
     }
     
@@ -170,7 +171,9 @@ public class TalonSRX extends PIDController
                 output = getOutput(getSelectedSensorVelocity(RobotMap.PID_PRIMARY, RobotMap.TIMEOUT), magnitude);
                 
             }
-            motor.setValue((float) ((dt == DemandType.FeedForward) ? (output + demandValue) : output));
+            output = ((dt == DemandType.FeedForward) ? (output + demandValue) : output);
+            prevOutput = output;
+            motor.setValue((float) output );
         }
         else
             throw new RuntimeException("Demand types not supported for Servo motors.");
@@ -183,7 +186,8 @@ public class TalonSRX extends PIDController
      */
     public void setupEncoder (int orangePin, int brownPin)
     {
-        sensors.put(FeedbackDevice.MagneticEncoder, new Encoder(orangePin, brownPin));
+        sensors.put(FeedbackDevice.MagneticEncoder, new SimpleEncoder(orangePin, brownPin)
+                .setController(this));
     }
     
     /**
@@ -242,5 +246,10 @@ public class TalonSRX extends PIDController
     public void setSelectedSensorPosition (double sensorValue, int loopIndex, int timeout)
     {
         selectedSensors[loopIndex].setPosition(sensorValue);
+    }
+    
+    protected double getOutputDirection()
+    {
+        return Math.signum(prevOutput);
     }
 }
