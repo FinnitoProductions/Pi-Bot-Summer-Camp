@@ -39,7 +39,8 @@ public class DriveToPosition extends Command
     @Override
     protected void initialize()
     {
-        Robot.getDrivetrain().applyToBoth((talon) -> {talon.set(ControlMode.Position, position);});
+        if (Robot.getDrivetrain() != null)
+            Robot.getDrivetrain().applyToBoth((talon) -> {talon.set(ControlMode.Position, position);});
     }
 
     /**
@@ -48,6 +49,8 @@ public class DriveToPosition extends Command
     @Override
     protected void execute()
     {
+        if (Robot.getDrivetrain() != null)
+            Robot.getDrivetrain().applyToBoth((talon) -> {talon.set(ControlMode.Position, position);});
     }
 
     /**

@@ -9,6 +9,7 @@ import lib.TalonSRX.FeedbackDevice;
 import studentcode.commands.*;
 import studentcode.robot.RobotMap;
 
+import java.security.InvalidParameterException;
 import java.util.function.Consumer;
 
 /**
@@ -48,8 +49,8 @@ public class Drivetrain extends Subsystem {
      * commands are being sent).
      */
     public void initDefaultCommand () {
-//        setDefaultCommand(new DriveToPosition(200));
-        setDefaultCommand (new DriveWithVelocityKeyboard());
+        setDefaultCommand(new DriveToPosition(200));
+//        setDefaultCommand (new DriveWithVelocityKeyboard());
     }
 
     /**
@@ -109,6 +110,10 @@ public class Drivetrain extends Subsystem {
             if (talon.getSelectedSensorVelocity(pidLoop, RobotMap.TIMEOUT) > 0)
                 System.out.println(talon.getSelectedSensorPosition(pidLoop, RobotMap.TIMEOUT));
         });
+        applyToBoth( (talon) -> {
+            if (talon.getSelectedSensorVelocity(pidLoop, RobotMap.TIMEOUT) > 0)
+                System.out.println();
+        });
     }
 
     /**
@@ -120,7 +125,14 @@ public class Drivetrain extends Subsystem {
     public boolean getClosedLoopErrorWithin (int pidLoop, int tolerance) {
         closedLoopErrorWithin = true;
         applyToBoth( (talon) -> {
-            closedLoopErrorWithin &= talon.getSelectedSensorPosition(pidLoop, RobotMap.TIMEOUT) < tolerance;
+            try
+            {
+                closedLoopErrorWithin &= talon.getSelectedSensorPosition(pidLoop, RobotMap.TIMEOUT) < tolerance;
+            }
+            catch (InvalidParameterException e)
+            {
+                closedLoopErrorWithin = false;
+            }
         });
         return closedLoopErrorWithin;
     }
