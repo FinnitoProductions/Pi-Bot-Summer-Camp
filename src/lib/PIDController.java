@@ -3,6 +3,8 @@ package lib;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.diozero.util.RangeUtil;
+
 import studentcode.robot.RobotMap;
 
 /**
@@ -159,16 +161,18 @@ public class PIDController
 
         lastError = error;
         lastTime = System.currentTimeMillis();
-        
-        return MathUtil.restrictValue(output_F + output_P + output_I + output_D, minOutput, maxOutput);
+
+        System.out.println("OUTPUT " + RangeUtil.constrain(output_F + output_P + output_I + output_D, minOutput, maxOutput));
+        return RangeUtil.constrain(output_F + output_P + output_I + output_D, minOutput, maxOutput);
     }
     
     /**
      * Gets the closed loop error at a given loop index.
      * @param loopIndex the PID loop index to check (primary/auxiliary) [0,1]
+     * @param timeout the time after which the program ceases to reattempt the command if it fails
      * @return closed loop error
      */
-    public double getClosedLoopError (double loopIndex)
+    public double getClosedLoopError (double loopIndex, double timeout)
     {
         return lastError;
     }

@@ -37,11 +37,11 @@ public class Drivetrain extends Subsystem {
 
     public void talonInit () {
         leftTalon.setupEncoder(RobotMap.LEFT_ENCODER_ORANGE, RobotMap.LEFT_ENCODER_BROWN);
-         rightTalon.setupEncoder(RobotMap.RIGHT_ENCODER_ORANGE, RobotMap.RIGHT_ENCODER_BROWN);
+        rightTalon.setupEncoder(RobotMap.RIGHT_ENCODER_ORANGE, RobotMap.RIGHT_ENCODER_BROWN);
 
         leftTalon.configSelectedFeedbackSensor(FeedbackDevice.MagneticEncoder, RobotMap.PID_PRIMARY, RobotMap.TIMEOUT);
-         rightTalon.configSelectedFeedbackSensor(FeedbackDevice.MagneticEncoder, RobotMap.PID_PRIMARY,
-         RobotMap.TIMEOUT);
+        rightTalon.configSelectedFeedbackSensor(FeedbackDevice.MagneticEncoder, RobotMap.PID_PRIMARY,
+                RobotMap.TIMEOUT);
     }
 
     /**
@@ -50,7 +50,7 @@ public class Drivetrain extends Subsystem {
      */
     public void initDefaultCommand () {
         setDefaultCommand(new DriveToPosition(200));
-//        setDefaultCommand (new DriveWithVelocityKeyboard());
+        // setDefaultCommand (new DriveWithVelocityKeyboard());
     }
 
     /**
@@ -125,12 +125,9 @@ public class Drivetrain extends Subsystem {
     public boolean getClosedLoopErrorWithin (int pidLoop, int tolerance) {
         closedLoopErrorWithin = true;
         applyToBoth( (talon) -> {
-            try
-            {
-                closedLoopErrorWithin &= talon.getSelectedSensorPosition(pidLoop, RobotMap.TIMEOUT) < tolerance;
-            }
-            catch (InvalidParameterException e)
-            {
+            try {
+                closedLoopErrorWithin &= Math.abs(talon.getClosedLoopError(pidLoop, RobotMap.TIMEOUT)) < tolerance;
+            } catch (InvalidParameterException e) {
                 closedLoopErrorWithin = false;
             }
         });
