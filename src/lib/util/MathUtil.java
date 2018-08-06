@@ -37,6 +37,17 @@ public class MathUtil
     }
     
     /**
+     * Determines whether a given value is within a given range, inclusive.
+     * @param value the value to be checked
+     * @param min the minimum value in the range
+     * @param max the maximum value in the range
+     * @return true if the value is within the range; false otherwise
+     */
+    public static boolean isWithin (double value, double min, double max)
+    {
+        return value >= min && value <= max;
+    }
+    /**
      * Determines whether a given String represents a number.
      * @param s the String to check
      * @return true if the String is a number; false otherwise
@@ -52,5 +63,20 @@ public class MathUtil
         {
             return false;
         }
+    }
+    
+    /**
+     * Determines whether a given String contains any numeric character.
+     * @param s the String to check
+     * @return true if the String contains any numeric value; false otherwise
+     */
+    public static boolean containsNumber (String s)
+    {
+        for (int i = 0; i < s.length(); i++)
+        {
+            if (isWithin(s.compareTo("0"), 0, 9))
+                return true;
+        }
+        return false;
     }
 }
