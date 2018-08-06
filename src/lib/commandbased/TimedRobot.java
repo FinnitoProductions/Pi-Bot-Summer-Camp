@@ -1,5 +1,6 @@
 package lib.commandbased;
 
+import lib.util.ConsoleReader;
 import studentcode.robot.Robot;
 
 /**
@@ -7,43 +8,37 @@ import studentcode.robot.Robot;
  * @author Finn Frankis
  * @version Jul 8, 2018
  */
-public abstract class TimedRobot
-{
+public abstract class TimedRobot {
     private int autonTime;
     private int teleopTime;
     private boolean initOver;
-    
+    private static final String stopCharacter = "^C";
+
     /**
      * Constructs a new TimedRobot.
      * @param autonTimeMs the time (in ms) for which auton should last
      * @param teleopTimeMs the time (in ms) for which teleop should last
      */
-    public TimedRobot(int autonTimeMs, int teleopTimeMs)
-    {
+    public TimedRobot (int autonTimeMs, int teleopTimeMs) {
         this.autonTime = autonTimeMs;
         this.teleopTime = teleopTimeMs;
     }
-    
+
     // move to Robot.java
-    public static void main(String[] args) throws InterruptedException
-    {
+    public static void main (String[] args) throws InterruptedException {
         new Robot().run();
     }
-    
+
     /**
      * To be run when the robot is enabled.
      * @throws InterruptedException if the Thread.sleep() calls are interrupted
      */
-    public void run() throws InterruptedException
-    {
+    public void run () throws InterruptedException {
         Thread initThread, periodicThread;
 
-        (periodicThread = new Thread()
-        {
-            public void run()
-            {
-                try
-                {
+        (periodicThread = new Thread() {
+            public void run () {
+                try {
                     System.out.println("Drivers behind the line.");
                     Thread.sleep(1000l);
                     System.out.println("Beginning in");
@@ -58,70 +53,76 @@ public abstract class TimedRobot
                     while (!initOver);
                     System.out.println("Autonomous period beginning.");
                     long startTime = System.currentTimeMillis();
-                    while (System.currentTimeMillis() - startTime < autonTime)
-                    {
+                    while (System.currentTimeMillis() - startTime < autonTime) {
                         autonomousPeriodic();
-                        robotPeriodic();
+                        superPeriodic();
                         Thread.sleep(5l); // pause to allow time for other operations
                     }
                     System.out.println("Teleoperated period beginning.");
                     teleopInit();
                     startTime = System.currentTimeMillis();
-                    while (System.currentTimeMillis() - startTime < teleopTime)
-                    {
+                    while (System.currentTimeMillis() - startTime < teleopTime) {
                         teleopPeriodic();
-                        robotPeriodic();
+                        superPeriodic();
                         Thread.sleep(5l); // pause to allow time for other operation
                     }
                     System.out.println("Match complete.");
-                    System.exit(0);
-                }
-                catch (InterruptedException e)
-                {
+                    TimedRobot.stop();
+                } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
         }).start();
-        
-        (initThread = new Thread() 
-        {
-            public void run()
-            {
+
+        (initThread = new Thread() {
+            public void run () {
                 robotInit();
                 autonomousInit();
                 initOver = true;
             }
         }).start();
-        
+
     }
-    
+
     /**
      * Called when autonomous begins.
      */
-    public abstract void autonomousInit();
-    
+    public abstract void autonomousInit ();
+
     /**
      * Called periodically during the autonomous period.
      */
-    public abstract void autonomousPeriodic();
-    
+    public abstract void autonomousPeriodic ();
+
     /**
      * Called when teleop begins.
      */
-    public abstract void teleopInit();
-    
+    public abstract void teleopInit ();
+
     /**
      * Called periodically during the teleoperated period.
      */
-    public abstract void teleopPeriodic();
-    
+    public abstract void teleopPeriodic ();
+
     /**
      * Called when the code is first deployed to the robot.
      */
-    public abstract void robotInit();
-    
+    public abstract void robotInit ();
+
     /**
      * Called periodically while the robot is powered on with code deployed.
      */
-    public abstract void robotPeriodic();    
+    public abstract void robotPeriodic ();
+    
+    public void superPeriodic()
+    {
+        robotPeriodic();
+        if (ConsoleReader.getValue().equals(stopCharacter))
+            stop();
+    }
+
+    public static void stop () {
+        System.out.println("STOPPING");
+        System.exit(0);
+    }
 }

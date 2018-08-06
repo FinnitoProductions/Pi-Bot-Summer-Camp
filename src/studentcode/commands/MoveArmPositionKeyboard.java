@@ -18,8 +18,9 @@ public class MoveArmPositionKeyboard extends Command
    
     public MoveArmPositionKeyboard()
     {
-        prevTurn = RobotMap.ARM_INTAKE_ANGLE;
+        prevTurn = RobotMap.ARM_OUTTAKE_ANGLE;
     }
+    
     public void execute()
     {
         double turn = 0;
@@ -63,5 +64,10 @@ public class MoveArmPositionKeyboard extends Command
     @Override
     protected void end()
     {
+    }
+    
+    public void setAngle (double newAngle)
+    {
+        prevTurn = newAngle;
     }
 }

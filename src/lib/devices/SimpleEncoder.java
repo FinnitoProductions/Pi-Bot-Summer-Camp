@@ -48,7 +48,6 @@ public class SimpleEncoder extends FeedbackSensor {
     protected FeedbackSensor setController (TalonSRX controller)
     {
         this.controller = controller;
-        System.out.println(controller);
         return this;
     }
 }

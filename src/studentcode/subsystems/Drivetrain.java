@@ -51,8 +51,8 @@ public class Drivetrain extends Subsystem {
      * commands are being sent).
      */
     public void initDefaultCommand () {
-        setDefaultCommand(new DriveToPosition(200));
-        // setDefaultCommand (new DriveWithVelocityKeyboard());
+        //setDefaultCommand(new DriveToPosition(50));
+         setDefaultCommand (new DriveWithVelocityKeyboard());
     }
 
     /**

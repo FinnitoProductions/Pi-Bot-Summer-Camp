@@ -41,6 +41,7 @@ public class DriveToPosition extends Command
     {
         Robot.getDrivetrain().selectProfileSlots(RobotMap.POS_PID_SLOT, RobotMap.PID_PRIMARY);
         Robot.getDrivetrain().applyToBoth((talon) -> {talon.set(ControlMode.Position, position);});
+        
     }
 
     /**
