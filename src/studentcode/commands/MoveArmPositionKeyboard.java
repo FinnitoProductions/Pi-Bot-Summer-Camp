@@ -1,8 +1,8 @@
 package studentcode.commands;
 
-import lib.Command;
-import lib.ConsoleReader;
-import lib.MathUtil;
+import lib.commandbased.Command;
+import lib.util.ConsoleReader;
+import lib.util.MathUtil;
 import studentcode.robot.Robot;
 import studentcode.robot.RobotMap;
 import studentcode.robot.RobotMap.KeyboardCharacters;

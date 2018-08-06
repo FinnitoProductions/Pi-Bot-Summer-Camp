@@ -1,4 +1,4 @@
-package lib;
+package lib.commandbased;
 
 import studentcode.robot.Robot;
 

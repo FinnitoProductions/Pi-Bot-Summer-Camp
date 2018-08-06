@@ -1,6 +1,6 @@
 package studentcode.commands;
 
-import lib.Command;
+import lib.commandbased.Command;
 import studentcode.robot.Robot;
 
 /**

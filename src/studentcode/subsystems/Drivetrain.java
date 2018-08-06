@@ -1,11 +1,11 @@
 
 package studentcode.subsystems;
 
-import lib.Subsystem;
-import lib.TalonSRX;
-import lib.TalonSRX.ControlMode;
-import lib.TalonSRX.DemandType;
-import lib.TalonSRX.FeedbackDevice;
+import lib.commandbased.Subsystem;
+import lib.devices.TalonSRX;
+import lib.devices.TalonSRX.ControlMode;
+import lib.devices.TalonSRX.DemandType;
+import lib.devices.TalonSRX.FeedbackDevice;
 import studentcode.commands.*;
 import studentcode.robot.RobotMap;
 

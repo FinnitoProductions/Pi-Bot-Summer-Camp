@@ -1,4 +1,4 @@
-package lib;
+package lib.commandbased;
 
 /**
  * A {@link TimedCommand} will wait for a timeout before finishing.

@@ -1,4 +1,4 @@
-package lib;
+package lib.devices;
 
 import java.security.InvalidParameterException;
 import java.util.HashMap;
@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.diozero.api.*;
 
+import lib.util.MathUtil;
 import studentcode.robot.RobotMap;
 
 
@@ -17,7 +18,7 @@ import studentcode.robot.RobotMap;
 public class TalonSRX extends PIDController
 {
     private FeedbackSensor[] selectedSensors;
-    private Map<FeedbackDevice, FeedbackSensor> sensors;
+    private Map<FeedbackDevice, FeedbackSensor> sensors; 
     private double prevOutput;
 
     

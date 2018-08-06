@@ -1,4 +1,4 @@
-package lib;
+package lib.devices;
 
 /**
  * Represents any type of sensor capable of reading data.

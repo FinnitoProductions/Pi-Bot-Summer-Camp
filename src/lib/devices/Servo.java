@@ -1,4 +1,4 @@
-package lib;
+package lib.devices;
 
 import com.diozero.api.OutputDeviceInterface;
 import com.pi4j.io.gpio.GpioController;

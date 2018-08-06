@@ -1,8 +1,8 @@
 package studentcode.subsystems;
 
-import lib.Subsystem;
-import lib.TalonSRX;
-import lib.TalonSRX.ControlMode;
+import lib.commandbased.Subsystem;
+import lib.devices.TalonSRX;
+import lib.devices.TalonSRX.ControlMode;
 import studentcode.commands.MoveClawPositionKeyboard;
 import studentcode.robot.RobotMap;
 

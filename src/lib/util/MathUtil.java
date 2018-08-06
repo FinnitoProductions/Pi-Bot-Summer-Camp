@@ -1,4 +1,4 @@
-package lib;
+package lib.util;
 
 /**
  * A container class to hold various utility functions.

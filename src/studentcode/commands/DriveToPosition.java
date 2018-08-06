@@ -1,7 +1,7 @@
 package studentcode.commands;
 
-import lib.Command;
-import lib.TalonSRX.ControlMode;
+import lib.commandbased.Command;
+import lib.devices.TalonSRX.ControlMode;
 import studentcode.robot.Robot;
 import studentcode.robot.RobotMap;
 
@@ -21,7 +21,7 @@ public class DriveToPosition extends Command
      */
     public DriveToPosition(double position)
     {
-        requires (Robot.getDrivetrain());
+        //requires (Robot.getDrivetrain());
         this.position = position;
     }
     /**
@@ -30,7 +30,7 @@ public class DriveToPosition extends Command
     @Override
     protected boolean isFinished()
     {
-        return Robot.getDrivetrain().getClosedLoopErrorWithin(RobotMap.PID_PRIMARY, RobotMap.POS_ALLOWABLE_ERROR);
+        return false;//Robot.getDrivetrain().getClosedLoopErrorWithin(RobotMap.PID_PRIMARY, RobotMap.POS_ALLOWABLE_ERROR);
     }
 
     /**

@@ -1,4 +1,4 @@
-package lib;
+package lib.commandbased;
 
 /**
  * http://first.wpi.edu/FRC/roborio/release/docs/java/edu/wpi/first/wpilibj/command/ConditionalCommand.html

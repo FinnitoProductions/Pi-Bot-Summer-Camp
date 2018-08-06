@@ -1,5 +1,5 @@
 
-package lib;
+package lib.commandbased;
 
 import java.util.*;
 
