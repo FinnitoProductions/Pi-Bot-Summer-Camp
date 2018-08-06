@@ -40,15 +40,15 @@ public class RobotMap
     public static final int CLAW_OPEN_ANGLE = 10;
     
     public static final int POS_PID_SLOT = 0;
-    public static final int POS_KF_L = 0;
-    public static final int POS_KP_L = 0;
-    public static final int POS_KI_L = 0;
-    public static final int POS_KD_L = 0;
+    public static final double POS_KF_L = 0;
+    public static final double POS_KP_L = 0;
+    public static final double POS_KI_L = 0;
+    public static final double POS_KD_L = 0;
     
-    public static final int POS_KF_R = 0;
-    public static final int POS_KP_R = 0;
-    public static final int POS_KI_R = 0;
-    public static final int POS_KD_R = 0;
+    public static final double POS_KF_R = 0;
+    public static final double POS_KP_R = 0;
+    public static final double POS_KI_R = 0;
+    public static final double POS_KD_R = 0;
     
 	public static final int POS_ALLOWABLE_ERROR = 10;
 	
