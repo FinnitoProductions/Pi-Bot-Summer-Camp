@@ -12,6 +12,7 @@ import java.util.Set;
  */
 public abstract class Command {
 	private Set<Subsystem> required;
+	private boolean isInitialized;
 	
 	/**
 	 * Creates a new command.
@@ -116,6 +117,7 @@ public abstract class Command {
 	 */
 	public void start() {
 		Scheduler.getInstance().add(this);
+		isInitialized = false;
 	}
 	
 	/**
@@ -132,5 +134,15 @@ public abstract class Command {
 	public String toString()
 	{
 	    return this.getClass().getName();
+	}
+	
+	protected boolean isInitialized()
+	{
+	    return isInitialized;
+	}
+	
+	protected void setInitialized(boolean newValue)
+	{
+	    isInitialized = newValue;
 	}
 }

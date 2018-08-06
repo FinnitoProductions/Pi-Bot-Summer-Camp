@@ -16,6 +16,7 @@ import java.util.*;
 public class Scheduler {
 	private static Scheduler sch;
 	private Set<Command> runningCommands;
+	private Map<Subsystem, Command> defaultCommands;
 	private Stack<Command> toRemove;
 	
 	/**
@@ -25,6 +26,7 @@ public class Scheduler {
 	 */
 	private Scheduler() {
 		runningCommands = Collections.newSetFromMap(new IdentityHashMap<>());
+		defaultCommands = new HashMap<Subsystem, Command>();
 		toRemove = new Stack<Command>();
 	}
 	
@@ -56,12 +58,6 @@ public class Scheduler {
 					toRemove.push(o);
 			while(!toRemove.isEmpty())
 				interrupt(toRemove.pop(), c);
-			try {
-				c.initialize();
-			} catch(Exception e) {
-				System.err.println("Error initializing command " + c.getClass().getSimpleName());
-				e.printStackTrace();
-			}
 		}
 	}
 	
@@ -138,6 +134,14 @@ public class Scheduler {
 	public void run() {
 		for(Command c : runningCommands) {
 			try {
+			    if (!c.isInitialized())
+			    {
+			        try { c.initialize(); c.setInitialized(true);}
+			        catch(Exception e) {
+		                System.err.println("Error initializing command " + c.getClass().getSimpleName());
+		                e.printStackTrace();
+		            }
+			    }
 				c.execute();
 				if(c.isFinished())
 					toRemove.push(c);
