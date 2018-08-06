@@ -151,7 +151,7 @@ public class PIDController
         
         if (Math.abs(error) >= iZone.get(primarySlot))
             errorSum = 0;
-        double output_I = kI.get(primarySlot) * errorSum;
+        double output_I = kI.get(primarySlot) * errorSum * (System.currentTimeMillis() - lastTime);
         errorSum += error;
         
         double output_D = 0; 
