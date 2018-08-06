@@ -42,6 +42,8 @@ public class Drivetrain extends Subsystem {
         leftTalon.configSelectedFeedbackSensor(FeedbackDevice.MagneticEncoder, RobotMap.PID_PRIMARY, RobotMap.TIMEOUT);
         rightTalon.configSelectedFeedbackSensor(FeedbackDevice.MagneticEncoder, RobotMap.PID_PRIMARY,
                 RobotMap.TIMEOUT);
+        
+        configPositionClosedLoop();
     }
 
     /**
@@ -132,5 +134,30 @@ public class Drivetrain extends Subsystem {
             }
         });
         return closedLoopErrorWithin;
+    }
+
+    /**
+     * Configures the position closed loop.
+     */
+    public void configPositionClosedLoop () {
+        getLeftTalon().config_kF(RobotMap.POS_KF_L, RobotMap.POS_PID_SLOT, RobotMap.TIMEOUT);
+        getLeftTalon().config_kP(RobotMap.POS_KP_L, RobotMap.POS_PID_SLOT, RobotMap.TIMEOUT);
+        getLeftTalon().config_kI(RobotMap.POS_KI_L, RobotMap.POS_PID_SLOT, RobotMap.TIMEOUT);
+        getLeftTalon().config_kD(RobotMap.POS_KD_L, RobotMap.POS_PID_SLOT, RobotMap.TIMEOUT);
+        
+        getRightTalon().config_kF(RobotMap.POS_KF_R, RobotMap.POS_PID_SLOT, RobotMap.TIMEOUT);
+        getRightTalon().config_kP(RobotMap.POS_KP_R, RobotMap.POS_PID_SLOT, RobotMap.TIMEOUT);
+        getRightTalon().config_kI(RobotMap.POS_KI_R, RobotMap.POS_PID_SLOT, RobotMap.TIMEOUT);
+        getRightTalon().config_kD(RobotMap.POS_KD_R, RobotMap.POS_PID_SLOT, RobotMap.TIMEOUT);
+    }
+    
+    /**
+     * Selects the profile slots for both Talons on the Drivetrain.
+     * @param pidSlot the PID slot index to be used [0, 3]
+     * @param pidLoop the PID loop index to which the pidSlot will be assigned [0, 1]
+     */
+    public void selectProfileSlots (int pidSlot, int pidLoop)
+    {
+        applyToBoth ( (talon) -> {talon.selectProfileSlot(pidSlot, pidLoop);});
     }
 }
