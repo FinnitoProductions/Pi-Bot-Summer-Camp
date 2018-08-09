@@ -51,8 +51,8 @@ public class Drivetrain extends Subsystem {
      * commands are being sent).
      */
     public void initDefaultCommand () {
-        //setDefaultCommand(new DriveToPosition(50));
-         setDefaultCommand (new DriveWithVelocityKeyboard());
+        //setDefaultCommand(new DriveToPosition(-50));
+        setDefaultCommand (new DriveWithVelocityKeyboard());
     }
 
     /**
@@ -110,7 +110,7 @@ public class Drivetrain extends Subsystem {
     public void printBothSensorPositions (int pidLoop) {
         applyToBoth( (talon) -> {
             if (talon.getSelectedSensorVelocity(pidLoop, RobotMap.TIMEOUT) > 0)
-                System.out.println(talon.getSelectedSensorPosition(pidLoop, RobotMap.TIMEOUT));
+                System.out.println("Encoder Position " + pidLoop + ":" + talon.getSelectedSensorPosition(pidLoop, RobotMap.TIMEOUT));
         });
         applyToBoth( (talon) -> {
             if (talon.getSelectedSensorVelocity(pidLoop, RobotMap.TIMEOUT) > 0)

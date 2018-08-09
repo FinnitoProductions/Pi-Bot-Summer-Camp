@@ -162,7 +162,7 @@ public class PIDController
         lastError = error;
         lastTime = System.currentTimeMillis();
 
-        System.out.println("OUTPUT " + RangeUtil.constrain(output_F + output_P + output_I + output_D, minOutput, maxOutput));
+        
         return RangeUtil.constrain(output_F + output_P + output_I + output_D, minOutput, maxOutput);
     }
     

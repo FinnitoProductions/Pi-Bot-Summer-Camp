@@ -21,7 +21,7 @@ public class DriveToPosition extends Command
      */
     public DriveToPosition(double position)
     {
-        //requires (Robot.getDrivetrain());
+        requires (Robot.getDrivetrain());
         this.position = position;
     }
     /**
@@ -30,7 +30,7 @@ public class DriveToPosition extends Command
     @Override
     protected boolean isFinished()
     {
-        return false;//Robot.getDrivetrain().getClosedLoopErrorWithin(RobotMap.PID_PRIMARY, RobotMap.POS_ALLOWABLE_ERROR);
+        return Robot.getDrivetrain().getClosedLoopErrorWithin(RobotMap.PID_PRIMARY, RobotMap.POS_ALLOWABLE_ERROR);
     }
 
     /**
