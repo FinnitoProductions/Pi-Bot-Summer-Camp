@@ -2,6 +2,7 @@ package studentcode.robot;
 
 import lib.commandbased.Scheduler;
 import lib.commandbased.TimedRobot;
+import studentcode.commands.AutonomousCommand;
 import studentcode.subsystems.*;
 
 /**
@@ -33,6 +34,8 @@ public class Robot extends TimedRobot
         getDrivetrain().talonInit();
         getArm().talonInit();
         getClaw().talonInit();
+        
+        new AutonomousCommand().start();
     }
 
     /**

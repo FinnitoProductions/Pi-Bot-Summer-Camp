@@ -50,7 +50,7 @@ public class RobotMap
     public static final double POS_KI_R = 0;
     public static final double POS_KD_R = 0;
     
-	public static final int POS_ALLOWABLE_ERROR = 10;
+	public static final int POS_ALLOWABLE_ERROR = 1;
 	
     public static class KeyboardCharacters
     {

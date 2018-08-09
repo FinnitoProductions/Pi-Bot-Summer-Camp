@@ -53,6 +53,7 @@ public abstract class TimedRobot {
                     while (!initOver);
                     System.out.println("Autonomous period beginning.");
                     long startTime = System.currentTimeMillis();
+                    autonomousInit();
                     while (System.currentTimeMillis() - startTime < autonTime) {
                         autonomousPeriodic();
                         superPeriodic();
@@ -77,7 +78,6 @@ public abstract class TimedRobot {
         (initThread = new Thread() {
             public void run () {
                 robotInit();
-                autonomousInit();
                 initOver = true;
             }
         }).start();
