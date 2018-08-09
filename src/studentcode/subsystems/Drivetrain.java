@@ -109,12 +109,12 @@ public class Drivetrain extends Subsystem {
      */
     public void printBothSensorPositions (int pidLoop) {
         applyToBoth( (talon) -> {
-            if (talon.getSelectedSensorVelocity(pidLoop, RobotMap.TIMEOUT) > 0)
-                System.out.println("Encoder Position " + pidLoop + ":" + talon.getSelectedSensorPosition(pidLoop, RobotMap.TIMEOUT));
+            //if (talon.getSelectedSensorVelocity(pidLoop, RobotMap.TIMEOUT) > 0)
+            System.out.println("Encoder Position " + pidLoop + ":" + talon.getSelectedSensorPosition(pidLoop, RobotMap.TIMEOUT));
         });
         applyToBoth( (talon) -> {
-            if (talon.getSelectedSensorVelocity(pidLoop, RobotMap.TIMEOUT) > 0)
-                System.out.println();
+            //if (talon.getSelectedSensorVelocity(pidLoop, RobotMap.TIMEOUT) > 0)
+            System.out.println();
         });
     }
 
