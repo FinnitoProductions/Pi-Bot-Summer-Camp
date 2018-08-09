@@ -34,7 +34,7 @@ public class RobotMap
     public static final int TIMEOUT = 10;
     
     public static final int ARM_OUTTAKE_ANGLE = 15;
-    public static final int ARM_INTAKE_ANGLE = 75;
+    public static final int ARM_INTAKE_ANGLE = 72;
     
     public static final int CLAW_CLOSE_ANGLE = 37;
     public static final int CLAW_OPEN_ANGLE = 10;
