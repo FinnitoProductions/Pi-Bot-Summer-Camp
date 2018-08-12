@@ -26,7 +26,7 @@ public class Drivetrain extends Subsystem {
     /**
      * Constructs a new Drivetrain.
      */
-    public Drivetrain () {
+    private Drivetrain () {
         leftTalon = new TalonSRX(RobotMap.LEFT_MOTOR_ENABLE,
                 RobotMap.LEFT_MOTOR_FORWARD,
                 RobotMap.LEFT_MOTOR_BACKWARD);

@@ -17,7 +17,7 @@ public class Arm extends Subsystem
 
     private TalonSRX servoArm;
     
-    public Arm()
+    private Arm()
     {
         servoArm = new TalonSRX(RobotMap.ARM_SERVO_GPIO);
     }

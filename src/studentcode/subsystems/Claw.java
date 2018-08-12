@@ -18,7 +18,7 @@ public class Claw extends Subsystem
     /**
      * Constructs a new Claw.
      */
-    public Claw()
+    private Claw()
     {
         servoClaw = new TalonSRX(RobotMap.CLAW_SERVO_GPIO);
     }
