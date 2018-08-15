@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.diozero.api.*;
 
+import lib.util.Constants;
 import lib.util.MathUtil;
 import studentcode.robot.RobotMap;
 
@@ -131,14 +132,14 @@ public class TalonSRX extends PIDController
         else if (mode == ControlMode.Position)
         {
             if (motor instanceof DigitalMotor)
-                output = getOutput(getSelectedSensorPosition(RobotMap.PID_PRIMARY, RobotMap.TIMEOUT), magnitude);
+                output = getOutput(getSelectedSensorPosition(Constants.PID_PRIMARY, Constants.TIMEOUT), magnitude);
             else if (motor instanceof Servo)
                 output = MathUtil.map(magnitude, 0, 180, 65, 265);
         }
         else if (mode == ControlMode.Velocity)
         {
             if (motor instanceof DigitalMotor)
-                output = getOutput(getSelectedSensorVelocity(RobotMap.PID_PRIMARY, RobotMap.TIMEOUT), magnitude);
+                output = getOutput(getSelectedSensorVelocity(Constants.PID_PRIMARY, Constants.TIMEOUT), magnitude);
             else
                 throw new RuntimeException("Velocity control mode only supported for digital motors.");
             
@@ -165,11 +166,11 @@ public class TalonSRX extends PIDController
             }
             else if (mode == ControlMode.Position)
             {
-                output = getOutput(getSelectedSensorPosition(RobotMap.PID_PRIMARY, RobotMap.TIMEOUT), magnitude);
+                output = getOutput(getSelectedSensorPosition(Constants.PID_PRIMARY, Constants.TIMEOUT), magnitude);
             }
             else if (mode == ControlMode.Velocity)
             {
-                output = getOutput(getSelectedSensorVelocity(RobotMap.PID_PRIMARY, RobotMap.TIMEOUT), magnitude);
+                output = getOutput(getSelectedSensorVelocity(Constants.PID_PRIMARY, Constants.TIMEOUT), magnitude);
                 
             }
             output = ((dt == DemandType.FeedForward) ? (output + demandValue) : output);
