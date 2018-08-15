@@ -20,17 +20,12 @@ public class SocketReader {
 
     public static void makeConnection () {
         try {
+            System.out.println("INSTANTIATING SERVER SOCKETO");
             serverSocket = new ServerSocket(Constants.SOCKET_PORT);
-            new Thread() {
-                public void run () {
-                    try {
-                        SocketReader.socket = SocketReader.serverSocket.accept();
-                        socketStream = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }.start();
+            System.out.println("FORMING SOCKET CONNECTION");
+            SocketReader.socket = serverSocket.accept();
+            System.out.println("SOCKET CONNECTION FORMED");
+            socketStream = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -42,12 +37,14 @@ public class SocketReader {
 
     public static String getValue ()
     {
+        System.out.println("CHECKING FOR VAL");
         try {
             if (socketStream != null)
-                return socketStream.readLine();
+                return socketStream.ready() ? socketStream.readLine() : "";
         } catch (IOException e) {
             e.printStackTrace();
         }
+        System.out.println("null stream");
         return "";
     }
 

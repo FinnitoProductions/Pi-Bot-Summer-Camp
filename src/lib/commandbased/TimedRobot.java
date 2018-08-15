@@ -1,6 +1,7 @@
 package lib.commandbased;
 
 import lib.util.ConsoleReader;
+import lib.util.SocketReader;
 import studentcode.robot.Robot;
 
 /**
@@ -34,6 +35,7 @@ public abstract class TimedRobot {
      * @throws InterruptedException if the Thread.sleep() calls are interrupted
      */
     public void run () throws InterruptedException {
+        SocketReader.makeConnection();
         Thread initThread, periodicThread;
 
         (periodicThread = new Thread() {
@@ -55,6 +57,8 @@ public abstract class TimedRobot {
                     long startTime = System.currentTimeMillis();
                     autonomousInit();
                     while (System.currentTimeMillis() - startTime < autonTime) {
+                        System.out.println("entering again");
+                        System.out.println("SOCK VAL:" + SocketReader.getValue());
                         autonomousPeriodic();
                         superPeriodic();
                         Thread.sleep(5l); // pause to allow time for other operations
