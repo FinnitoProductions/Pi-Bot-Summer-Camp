@@ -13,5 +13,6 @@
 	<classpathentry kind="lib" path="lib/pi4j-core-1.1.jar"/>
 	<classpathentry kind="lib" path="lib/pigpioj-java-2.1.jar"/>
 	<classpathentry kind="lib" path="lib/tinylog-1.2.jar"/>
+	<classpathentry kind="lib" path="lib/wpiraspi-9:3:18.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
