@@ -8,15 +8,11 @@ public abstract class Subsystem
 {
     private Command defaultCommand;
     
-    public Subsystem()
-    {
-    		initDefaultCommand();
-    		if(defaultCommand != null) {
-    			Scheduler.getInstance().add(defaultCommand);
-    		}
-    }
-    
     public abstract void initDefaultCommand();
+    
+    public Subsystem () {
+        Scheduler.getInstance().addSubsystem(this);
+    }
     
     public void setDefaultCommand (Command c)
     {

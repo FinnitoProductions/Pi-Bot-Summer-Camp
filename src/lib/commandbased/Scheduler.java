@@ -16,7 +16,7 @@ import java.util.*;
 public class Scheduler {
 	private static Scheduler sch;
 	private Set<Command> runningCommands;
-	private Map<Subsystem, Command> defaultCommands;
+	private List<Subsystem> subsystems;
 	private Stack<Command> toRemove;
 	
 	/**
@@ -26,7 +26,7 @@ public class Scheduler {
 	 */
 	private Scheduler() {
 		runningCommands = Collections.newSetFromMap(new IdentityHashMap<>());
-		defaultCommands = new HashMap<Subsystem, Command>();
+		subsystems = new ArrayList<Subsystem>();
 		toRemove = new Stack<Command>();
 	}
 	
@@ -150,6 +150,11 @@ public class Scheduler {
 				e.printStackTrace();
 			}
 		}
+		
+		for (Subsystem s : subsystems) { 
+		    if (s.getDefaultCommand() == null)
+		        s.initDefaultCommand();
+		}
 		while(!toRemove.isEmpty())
 			remove(toRemove.pop());
 	}
@@ -169,5 +174,9 @@ public class Scheduler {
 			if(o.doesRequire(s))
 				return true;
 		return false;
+	}
+	
+	protected void addSubsystem (Subsystem s) {
+	    
 	}
 }
